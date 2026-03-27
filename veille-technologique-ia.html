@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veille Technologique — PORTFOLIO</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f7f7f5;
+    --border: #e8e5e0;
+    --text: #1a1a1a;
+    --muted: #6b6b6b;
+    --faint: #9a9a9a;
+    --green: #2d6a4f;
+    --red: #9b2335;
+    --tag-bg: #f0ede8;
+    --tag-text: #4a4a4a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: 0 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+
+  .nav-logo {
+    font-family: 'Lora', serif;
+    font-weight: 700; font-size: 1.1rem;
+    color: var(--text); letter-spacing: -0.01em;
+  }
+
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.82rem; font-weight: 400;
+    letter-spacing: 0.02em; transition: color 0.2s;
+    position: relative;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-links a.active {
+    color: var(--text); font-weight: 500;
+  }
+
+  .nav-links a.active::after {
+    content: '';
+    position: absolute; bottom: -4px; left: 0; right: 0;
+    height: 1.5px; background: var(--text);
+  }
+
+  .hero {
+    max-width: 860px; margin: 0 auto;
+    padding: 80px 40px 56px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .breadcrumb {
+    font-size: 0.75rem; color: var(--faint);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 24px; display: flex; align-items: center; gap: 8px;
+  }
+
+  .breadcrumb span { color: var(--muted); }
+
+  h1 {
+    font-family: 'Lora', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 700; line-height: 1.15;
+    letter-spacing: -0.02em; color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  .hero-desc {
+    font-size: 1rem; color: var(--muted);
+    max-width: 580px; margin-bottom: 36px; line-height: 1.8;
+  }
+
+  .hero-chips { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 14px;
+    border: 1px solid var(--border); border-radius: 100px;
+    font-size: 0.78rem; color: var(--muted);
+    background: var(--surface);
+  }
+
+  .chip strong { color: var(--text); font-weight: 500; }
+
+  .main {
+    max-width: 860px; margin: 0 auto;
+    padding: 64px 40px 80px;
+  }
+
+  .section-head {
+    display: flex; align-items: baseline; gap: 16px;
+    margin-bottom: 32px; padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-num {
+    font-family: 'Lora', serif;
+    font-size: 0.85rem; color: var(--faint); font-style: italic; flex-shrink: 0;
+  }
+
+  h2 {
+    font-family: 'Lora', serif;
+    font-size: 1.35rem; font-weight: 600;
+    color: var(--text); letter-spacing: -0.01em;
+  }
+
+  .intro-block { margin-bottom: 64px; }
+
+  .deux-col {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 20px; margin-top: 24px;
+  }
+
+  .info-box {
+    background: var(--surface);
+    border: 1px solid var(--border); border-radius: 10px;
+    padding: 24px 28px;
+  }
+
+  .info-box h3 {
+    font-family: 'Lora', serif; font-size: 0.95rem; font-weight: 600;
+    color: var(--text); margin-bottom: 10px;
+  }
+
+  .info-box p { font-size: 0.88rem; color: var(--muted); line-height: 1.75; }
+
+  .feedly-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #eaf7ef; border: 1px solid #b7dece;
+    color: #2d6a4f; padding: 6px 12px; border-radius: 6px;
+    font-size: 0.8rem; font-weight: 500; margin-bottom: 12px;
+  }
+
+  .timeline-block { margin-bottom: 64px; }
+
+  .tl-item {
+    display: grid; grid-template-columns: 100px 1fr;
+    gap: 32px; margin-bottom: 8px; position: relative;
+  }
+
+  .tl-item:not(:last-child)::before {
+    content: '';
+    position: absolute; left: 49px; top: 40px; bottom: -8px;
+    width: 1px; background: var(--border);
+  }
+
+  .tl-left {
+    display: flex; flex-direction: column;
+    align-items: center; padding-top: 18px; gap: 10px;
+  }
+
+  .tl-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    background: #fff; border: 2px solid var(--text);
+    flex-shrink: 0; z-index: 1;
+  }
+
+  .tl-year {
+    font-size: 0.7rem; color: var(--faint);
+    text-align: center; line-height: 1.3; letter-spacing: 0.04em;
+  }
+
+  .tl-card {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 10px; padding: 28px 32px; margin-bottom: 20px;
+    transition: box-shadow 0.25s;
+  }
+
+  .tl-card:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
+
+  .tl-card h3 {
+    font-family: 'Lora', serif; font-size: 1.05rem; font-weight: 600;
+    color: var(--text); letter-spacing: -0.01em; margin-bottom: 10px;
+  }
+
+  .tl-card p {
+    font-size: 0.88rem; color: var(--muted);
+    margin-bottom: 18px; line-height: 1.75;
+  }
+
+  .tl-sub {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px; margin-bottom: 18px;
+  }
+
+  .tl-sub-box {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px 14px;
+  }
+
+  .tl-sub-label {
+    font-size: 0.68rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--faint); margin-bottom: 8px;
+  }
+
+  .tags-row { display: flex; flex-wrap: wrap; gap: 5px; }
+
+  .tag {
+    font-size: 0.74rem; padding: 3px 10px; border-radius: 100px;
+    background: var(--tag-bg); color: var(--tag-text); font-weight: 400;
+  }
+
+  .sources-line {
+    display: flex; flex-wrap: wrap; gap: 12px;
+    padding-top: 14px; border-top: 1px solid var(--border);
+  }
+
+  .src-link {
+    font-size: 0.75rem; color: var(--faint);
+    text-decoration: none; transition: color 0.2s;
+  }
+
+  .src-link:hover { color: var(--text); text-decoration: underline; }
+
+  .schema-block { margin-bottom: 64px; }
+
+  .flow-wrap {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 48px 40px;
+    display: flex; align-items: flex-start; justify-content: center;
+    flex-wrap: wrap; gap: 8px; margin-top: 24px;
+  }
+
+  .flow-item {
+    display: flex; flex-direction: column;
+    align-items: center; text-align: center; gap: 12px;
+    min-width: 120px; max-width: 140px;
+  }
+
+  .flow-circle {
+    width: 64px; height: 64px; border-radius: 50%;
+    border: 1.5px solid var(--border); background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .flow-name {
+    font-family: 'Lora', serif; font-size: 0.9rem; font-weight: 600; color: var(--text);
+  }
+
+  .flow-sub { font-size: 0.75rem; color: var(--faint); line-height: 1.5; }
+
+  .flow-arrow { color: var(--border); font-size: 1.1rem; margin-top: 20px; padding: 0 4px; }
+
+  .table-block { margin-bottom: 64px; }
+
+  .tbl-wrap {
+    border: 1px solid var(--border); border-radius: 10px;
+    overflow: hidden; margin-top: 24px;
+  }
+
+  table { width: 100%; border-collapse: collapse; }
+  thead { background: var(--surface); }
+
+  th {
+    font-size: 0.72rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--faint); padding: 14px 20px;
+    text-align: left; border-bottom: 1px solid var(--border);
+  }
+
+  td {
+    padding: 13px 20px; font-size: 0.88rem; color: var(--text);
+    border-bottom: 1px solid #f0ede8;
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--surface); }
+
+  .level-wrap { display: flex; align-items: center; gap: 10px; }
+
+  .bar {
+    flex: 1; height: 3px; background: var(--border);
+    border-radius: 2px; overflow: hidden;
+  }
+
+  .bar-inner { height: 100%; background: var(--text); border-radius: 2px; }
+
+  .level-lbl {
+    font-size: 0.78rem; color: var(--faint);
+    white-space: nowrap; min-width: 64px;
+  }
+
+  .analysis-block { margin-bottom: 64px; }
+
+  .analysis-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 20px; margin-top: 24px;
+  }
+
+  .ana-card {
+    border: 1px solid var(--border); border-radius: 10px;
+    padding: 28px 32px; background: #fff;
+  }
+
+  .ana-card.pros { border-top: 3px solid var(--green); }
+  .ana-card.cons { border-top: 3px solid var(--red); }
+
+  .ana-card h3 {
+    font-family: 'Lora', serif; font-size: 1rem; font-weight: 600;
+    margin-bottom: 20px; display: flex; align-items: center; gap: 8px;
+  }
+
+  .pros h3 { color: var(--green); }
+  .cons h3 { color: var(--red); }
+
+  .ana-item {
+    display: flex; gap: 12px; margin-bottom: 14px;
+    font-size: 0.88rem; color: var(--muted); line-height: 1.65;
+  }
+
+  .ana-item::before { content: '—'; color: var(--faint); flex-shrink: 0; }
+
+  footer {
+    border-top: 1px solid var(--border); padding: 28px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 0.78rem; color: var(--faint);
+  }
+
+  footer a { color: var(--faint); text-decoration: none; }
+  footer a:hover { color: var(--text); }
+
+  @media (max-width: 700px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hero, .main { padding-left: 24px; padding-right: 24px; }
+    .deux-col, .analysis-grid { grid-template-columns: 1fr; }
+    .tl-item { grid-template-columns: 56px 1fr; gap: 16px; }
+    .tl-item::before { left: 27px !important; }
+    .flow-wrap { flex-direction: column; align-items: center; }
+    .flow-arrow { transform: rotate(90deg); margin-top: 0; }
+    footer { flex-direction: column; gap: 8px; text-align: center; padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">PORTFOLIO</div>
+  <ul class="nav-links">
+    <li><a href="#">Accueil</a></li>
+    <li><a href="#">Documents</a></li>
+    <li><a href="#">Compétences</a></li>
+    <li><a href="#">Projets</a></li>
+    <li><a href="#" class="active">Veille Technologique</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <div class="breadcrumb">Portfolio <span>›</span> Veille Technologique</div>
+  <h1>L'évolution de l'IA<br>dans le développement logiciel</h1>
+  <p class="hero-desc">
+    De l'outil réservé aux experts à l'agent autonome — retour sur une transformation majeure qui redéfinit le métier de développeur.
+  </p>
+  <div class="hero-chips">
+    <div class="chip">📚 <strong>BTS SIO</strong> — 2ème année</div>
+    <div class="chip">📅 Période <strong>2022 – 2025</strong></div>
+    <div class="chip">📡 Outil de veille : <strong>Feedly</strong></div>
+  </div>
+</header>
+
+<main class="main">
+
+  <section class="intro-block">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2>Contexte de la veille</h2>
+    </div>
+    <div class="deux-col">
+      <div class="info-box">
+        <h3>Qu'est-ce que la veille technologique ?</h3>
+        <p>La veille technologique consiste à surveiller en continu les évolutions techniques et les innovations pour anticiper les changements et rester à jour dans son domaine professionnel.</p>
+      </div>
+      <div class="info-box">
+        <div class="feedly-badge">📡 Feedly — Lecteur RSS</div>
+        <p>J'ai configuré des flux RSS sur mobile et navigateur, en sélectionnant manuellement des sources variées après des recherches ciblées : blogs techniques, éditeurs, publications de recherche.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="timeline-block">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2>Chronologie de l'évolution</h2>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-dot"></div>
+        <div class="tl-year">Avant<br>2022</div>
+      </div>
+      <div class="tl-card">
+        <h3>Début de l'IA moderne</h3>
+        <p>Avant son intégration massive dans le développement, l'IA était cantonnée à des domaines très spécialisés, réservée aux experts en data science et en recherche.</p>
+        <div class="tl-sub">
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Usages</div>
+            <div class="tags-row">
+              <span class="tag">Reconnaissance d'image</span>
+              <span class="tag">Traduction automatique</span>
+              <span class="tag">Recommandation</span>
+            </div>
+          </div>
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Technologies</div>
+            <div class="tags-row">
+              <span class="tag">Machine Learning</span>
+              <span class="tag">Deep Learning</span>
+            </div>
+          </div>
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Limite</div>
+            <div class="tags-row">
+              <span class="tag">Complexe à utiliser</span>
+              <span class="tag">Réservée aux experts</span>
+            </div>
+          </div>
+        </div>
+        <div class="sources-line">
+          <a class="src-link" href="https://www.ibm.com/cloud/learn/machine-learning" target="_blank">↗ ibm.com — Machine Learning</a>
+          <a class="src-link" href="https://towardsdatascience.com" target="_blank">↗ towardsdatascience.com</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2022<br>2023</div>
+      </div>
+      <div class="tl-card">
+        <h3>Arrivée des IA génératives</h3>
+        <p>Une révolution s'amorce avec des modèles capables de <em>générer</em> du contenu à la demande. La démocratisation de l'IA s'accélère et les développeurs adoptent massivement ces nouveaux outils.</p>
+        <div class="tl-sub">
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Modèles phares</div>
+            <div class="tags-row">
+              <span class="tag">ChatGPT</span>
+              <span class="tag">GitHub Copilot</span>
+            </div>
+          </div>
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Nouvelles capacités</div>
+            <div class="tags-row">
+              <span class="tag">Génération de texte</span>
+              <span class="tag">Génération de code</span>
+              <span class="tag">Assistance instantanée</span>
+            </div>
+          </div>
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Impact</div>
+            <div class="tags-row">
+              <span class="tag">Démocratisation</span>
+              <span class="tag">Adoption rapide</span>
+            </div>
+          </div>
+        </div>
+        <div class="sources-line">
+          <a class="src-link" href="https://openai.com/blog/chatgpt" target="_blank">↗ openai.com — ChatGPT</a>
+          <a class="src-link" href="https://github.blog" target="_blank">↗ github.blog</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2023<br>2024</div>
+      </div>
+      <div class="tl-card">
+        <h3>Amélioration rapide des performances</h3>
+        <p>Les modèles progressent en précision et en compréhension contextuelle. Leur intégration dans les environnements de développement quotidiens devient standard.</p>
+        <div class="tl-sub">
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Progrès</div>
+            <div class="tags-row">
+              <span class="tag">Meilleur contexte</span>
+              <span class="tag">Moins d'erreurs</span>
+              <span class="tag">Réponses structurées</span>
+            </div>
+          </div>
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Intégrations</div>
+            <div class="tags-row">
+              <span class="tag">VS Code</span>
+              <span class="tag">JetBrains</span>
+              <span class="tag">Microsoft 365</span>
+              <span class="tag">Cloud</span>
+            </div>
+          </div>
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Usages</div>
+            <div class="tags-row">
+              <span class="tag">Aide au code</span>
+              <span class="tag">Documentation auto</span>
+              <span class="tag">Debug assisté</span>
+            </div>
+          </div>
+        </div>
+        <div class="sources-line">
+          <a class="src-link" href="https://openai.com/index/gpt-4/" target="_blank">↗ openai.com — GPT-4</a>
+          <a class="src-link" href="https://learn.microsoft.com" target="_blank">↗ learn.microsoft.com</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2024<br>2025</div>
+      </div>
+      <div class="tl-card">
+        <h3>L'IA comme copilote du développeur</h3>
+        <p>L'IA devient un véritable partenaire de travail. Elle prend en charge les tâches répétitives, libérant le développeur pour la conception et l'architecture.</p>
+        <div class="tl-sub">
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Ce qu'elle produit</div>
+            <div class="tags-row">
+              <span class="tag">Fonctions complètes</span>
+              <span class="tag">Tests unitaires</span>
+              <span class="tag">Optimisation</span>
+              <span class="tag">Détection failles</span>
+            </div>
+          </div>
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Impact métier</div>
+            <div class="tags-row">
+              <span class="tag">Moins répétitif</span>
+              <span class="tag">Plus de conception</span>
+            </div>
+          </div>
+        </div>
+        <div class="sources-line">
+          <a class="src-link" href="https://openai.com" target="_blank">↗ openai.com</a>
+          <a class="src-link" href="https://research.google" target="_blank">↗ research.google</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2025</div>
+      </div>
+      <div class="tl-card">
+        <h3>Apparition des agents autonomes</h3>
+        <p>Nouvelle frontière : des IA capables d'agir seules sur un projet entier. Elles analysent, planifient et exécutent plusieurs actions en chaîne. La validation humaine reste néanmoins indispensable.</p>
+        <div class="tl-sub">
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Fonctionnement</div>
+            <div class="tags-row">
+              <span class="tag">Analyse du problème</span>
+              <span class="tag">Planification</span>
+              <span class="tag">Exécution en chaîne</span>
+            </div>
+          </div>
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Exemples</div>
+            <div class="tags-row">
+              <span class="tag">Créer une app</span>
+              <span class="tag">Corriger un projet</span>
+              <span class="tag">Automatiser un workflow</span>
+            </div>
+          </div>
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Limite</div>
+            <div class="tags-row">
+              <span class="tag">Validation humaine requise</span>
+            </div>
+          </div>
+        </div>
+        <div class="sources-line">
+          <a class="src-link" href="https://deepmind.google" target="_blank">↗ deepmind.google</a>
+          <a class="src-link" href="https://openai.com/research" target="_blank">↗ openai.com/research</a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="schema-block">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2>Schéma global de l'évolution</h2>
+    </div>
+    <div class="flow-wrap">
+      <div class="flow-item">
+        <div class="flow-circle">🔧</div>
+        <div class="flow-name">Assistant</div>
+        <div class="flow-sub">Aide simple<br>et ponctuelle</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item">
+        <div class="flow-circle">🤝</div>
+        <div class="flow-name">Collaborateur</div>
+        <div class="flow-sub">Interaction<br>avec l'humain</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item">
+        <div class="flow-circle">🚀</div>
+        <div class="flow-name">Copilote</div>
+        <div class="flow-sub">Participation<br>active au code</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item">
+        <div class="flow-circle">🤖</div>
+        <div class="flow-name">Agent autonome</div>
+        <div class="flow-sub">Prise d'initiative<br>et exécution seule</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="table-block">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2>Évolution des usages par période</h2>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Période</th>
+            <th>Rôle de l'IA</th>
+            <th>Niveau d'autonomie</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Avant 2022</td>
+            <td>Outil spécialisé</td>
+            <td><div class="level-wrap"><div class="bar"><div class="bar-inner" style="width:12%"></div></div><span class="level-lbl">Faible</span></div></td>
+          </tr>
+          <tr>
+            <td>2022 – 2023</td>
+            <td>Assistant</td>
+            <td><div class="level-wrap"><div class="bar"><div class="bar-inner" style="width:35%"></div></div><span class="level-lbl">Moyen</span></div></td>
+          </tr>
+          <tr>
+            <td>2023 – 2024</td>
+            <td>Collaborateur</td>
+            <td><div class="level-wrap"><div class="bar"><div class="bar-inner" style="width:60%"></div></div><span class="level-lbl">Élevé</span></div></td>
+          </tr>
+          <tr>
+            <td>2024 – 2025</td>
+            <td>Copilote</td>
+            <td><div class="level-wrap"><div class="bar"><div class="bar-inner" style="width:80%"></div></div><span class="level-lbl">Très élevé</span></div></td>
+          </tr>
+          <tr>
+            <td>2025</td>
+            <td>Agent autonome</td>
+            <td><div class="level-wrap"><div class="bar"><div class="bar-inner" style="width:100%"></div></div><span class="level-lbl">Avancé</span></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="analysis-block">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <h2>Analyse critique</h2>
+    </div>
+    <div class="analysis-grid">
+      <div class="ana-card pros">
+        <h3>✅ Avantages</h3>
+        <div class="ana-item">Gain de temps considérable sur les tâches répétitives et de routine</div>
+        <div class="ana-item">Amélioration mesurable de la productivité des équipes de développement</div>
+        <div class="ana-item">Réduction du taux d'erreurs grâce aux analyses automatiques avancées</div>
+        <div class="ana-item">Accélération de l'innovation et du prototypage de nouvelles fonctionnalités</div>
+      </div>
+      <div class="ana-card cons">
+        <h3>⚠️ Inconvénients</h3>
+        <div class="ana-item">Risque de dépendance aux outils, pouvant affaiblir certaines compétences de base</div>
+        <div class="ana-item">Code généré pas toujours fiable ou sécurisé, nécessitant une vérification humaine</div>
+        <div class="ana-item">Questions juridiques sur la propriété intellectuelle et la confidentialité des données</div>
+        <div class="ana-item">Impact potentiel sur certains postes techniques à mesure que l'automatisation progresse</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>© 2025 Noah Poivre — BTS SIO 2ème année</span>
+  <span>Sources : OpenAI · Google Research · IBM · GitHub · Microsoft</span>
+</footer>
+
+</body>
+</html>
