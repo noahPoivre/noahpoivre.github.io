@@ -642,7 +642,7 @@
       <li><a href="#projets">Projets</a></li>
       <li><a href="#competences">Compétences</a></li>
       <li><a href="#stages">Stages</a></li>
-      <li><a href="#contact">Veille Technologique</a></li>
+      <li><a href="#veille">Veille</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
@@ -793,14 +793,51 @@
 
   <hr class="divider">
 
+  <!-- VEILLE TECHNOLOGIQUE -->
+  <section id="veille">
+    <p class="section-label reveal">// 04 — Veille</p>
+    <h2 class="reveal">Veille Technologique</h2>
+
+    <div class="veille-intro reveal">
+      <strong>L'Intelligence Artificielle dans le développement logiciel</strong><br>
+      La veille technologique consiste à surveiller les évolutions techniques et les innovations pour anticiper les changements et rester à jour dans son domaine. L'IA est une branche de l'informatique qui vise à créer des systèmes capables de reproduire certaines fonctions de l'intelligence humaine — apprendre, raisonner, résoudre des problèmes.
+    </div>
+
+    <div class="veille-grid reveal">
+
+      <div class="veille-card">
+        <h4>✅ Avantages</h4>
+        <ul>
+          <li><strong>Gain de productivité</strong> — GitHub Copilot, ChatGPT, génération de code plus rapide.</li>
+          <li><strong>Qualité du code</strong> — détection de bugs, propositions d'optimisations et sécurité.</li>
+          <li><strong>Automatisation</strong> — tests unitaires, documentation, maintenance.</li>
+          <li><strong>Innovation</strong> — chatbots, reconnaissance vocale, systèmes de recommandation.</li>
+        </ul>
+      </div>
+
+      <div class="veille-card">
+        <h4>⚠️ Inconvénients</h4>
+        <ul>
+          <li><strong>Dépendance</strong> — risque de perte de compétences en programmation.</li>
+          <li><strong>Fiabilité</strong> — le code généré n'est pas toujours optimal, vérification humaine nécessaire.</li>
+          <li><strong>Éthique & juridique</strong> — propriété intellectuelle et confidentialité des données.</li>
+          <li><strong>Emploi</strong> — automatisation de certains postes techniques.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider">
+
   <!-- CONTACT -->
   <section id="contact">
-    <p class="section-label reveal">// 04 — Contact</p>
+    <p class="section-label reveal">// 05 — Contact</p>
     <h2 class="reveal">Travaillons ensemble</h2>
     <p class="reveal" style="color:var(--muted);">Tu veux qu'on collabore sur un projet ? Retrouve-moi ici :</p>
     <div class="contact-links reveal">
       <a href="https://www.linkedin.com/in/" class="btn btn-primary" target="_blank">LinkedIn</a>
-      <a href="/cdn-cgi/l/email-protection#0f61606e677f6066797d6a4f6a776e627f636a216c6062" class="btn btn-outline">E-mail</a>
+      <a href="mailto:noahpoivre@example.com" class="btn btn-outline">E-mail</a>
     </div>
 
     <!-- QUICK ACCESS CARDS -->
@@ -844,7 +881,7 @@
     </div>
   </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     // Scroll reveal
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
@@ -894,4 +931,12 @@
     btnOpen.addEventListener('click', openModal);
     btnClose.addEventListener('click', closeModal);
     submit.addEventListener('click', checkPassword);
-    input.addEventListener('keydown', e => { if (e.key === 'Enter
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') checkPassword(); });
+
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) closeModal();
+    });
+  </script>
+
+</body>
+</html>
