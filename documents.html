@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Documents — Poivre Noah</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --surface: #121212;
+      --border: #1e1e1e;
+      --accent: #c8f060;
+      --accent2: #60f0c8;
+      --text: #e8e8e0;
+      --muted: #666;
+      --font-display: 'DM Serif Display', serif;
+      --font-mono: 'DM Mono', monospace;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0; z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-logo {
+      font-family: var(--font-mono);
+      font-size: .85rem;
+      color: var(--accent);
+      letter-spacing: .12em;
+      text-decoration: none;
+    }
+
+    .nav-back {
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      transition: color .2s;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+
+    .nav-back:hover { color: var(--accent); }
+
+    /* HEADER */
+    .page-header {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 5rem 3rem 4rem;
+      border-bottom: 1px solid var(--border);
+      animation: fadeUp .6s ease both;
+    }
+
+    .breadcrumb {
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      color: var(--muted);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .breadcrumb a { color: var(--accent); text-decoration: none; }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      margin-bottom: 1rem;
+    }
+
+    h1 em { font-style: italic; color: var(--accent); }
+
+    .header-desc {
+      color: var(--muted);
+      font-size: .95rem;
+      max-width: 480px;
+    }
+
+    .lock-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      color: var(--accent2);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      border: 1px solid rgba(96,240,200,.25);
+      padding: .25rem .8rem;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+
+    /* MAIN */
+    .main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 3rem 6rem;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      color: var(--accent);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    /* DOC CARDS */
+    .docs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5px;
+      background: var(--border);
+      border: 1.5px solid var(--border);
+      margin-bottom: 5rem;
+    }
+
+    .doc-card {
+      background: var(--bg);
+      padding: 2.5rem;
+      transition: background .2s;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .doc-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .3s;
+    }
+
+    .doc-card:hover { background: var(--surface); }
+    .doc-card:hover::before { transform: scaleX(1); }
+
+    .doc-type {
+      font-family: var(--font-mono);
+      font-size: .62rem;
+      color: var(--accent2);
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .doc-icon {
+      font-size: 2.2rem;
+      line-height: 1;
+    }
+
+    .doc-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: var(--text);
+    }
+
+    .doc-desc {
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .doc-meta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: .5rem;
+    }
+
+    .doc-chip {
+      font-family: var(--font-mono);
+      font-size: .62rem;
+      color: var(--muted);
+      letter-spacing: .08em;
+      border: 1px solid var(--border);
+      padding: .2rem .6rem;
+      border-radius: 2px;
+    }
+
+    .doc-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-top: .5rem;
+      transition: gap .2s;
+    }
+
+    .doc-link:hover { gap: .8rem; }
+
+    /* INFO BOX */
+    .info-box {
+      background: linear-gradient(135deg, rgba(200,240,96,.04), rgba(96,240,200,.03));
+      border: 1px solid rgba(200,240,96,.12);
+      border-radius: 4px;
+      padding: 1.8rem 2rem;
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .info-box strong { color: var(--text); }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      color: var(--muted);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    .fade-in {
+      animation: fadeUp .5s ease both;
+    }
+
+    .fade-in-2 { animation-delay: .1s; }
+    .fade-in-3 { animation-delay: .2s; }
+
+    @media(max-width: 700px) {
+      nav { padding: 1rem 1.5rem; }
+      .page-header, .main { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .docs-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: .5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">NP.dev</a>
+    <a class="nav-back" href="index.html">← Retour au portfolio</a>
+  </nav>
+
+  <header class="page-header">
+    <div class="breadcrumb">
+      <a href="index.html">Portfolio</a>
+      <span style="color:var(--border)">›</span>
+      Documents
+    </div>
+    <div class="lock-badge">🔐 Zone sécurisée</div>
+    <h1>Mes <em>Documents</em></h1>
+    <p class="header-desc">CV et tableau de synthèse des compétences dans le cadre du BTS SIO option SLAM.</p>
+  </header>
+
+  <main class="main">
+
+    <p class="section-label fade-in">// Documents disponibles</p>
+
+    <div class="docs-grid fade-in fade-in-2">
+
+      <!-- CV -->
+      <div class="doc-card">
+        <div class="doc-icon">📄</div>
+        <div class="doc-type">Curriculum Vitæ</div>
+        <div class="doc-title">CV — Noah Poivre</div>
+        <div class="doc-desc">
+          Curriculum Vitæ complet : formations, expériences de stage, compétences techniques et centres d'intérêt.
+        </div>
+        <div class="doc-meta">
+          <span class="doc-chip">PDF</span>
+          <span class="doc-chip">BTS SIO · 2025</span>
+        </div>
+        <!-- Remplace le href par le vrai chemin vers ton fichier CV -->
+        <a href="cv-noah-poivre.pdf" class="doc-link" target="_blank" download>
+          Télécharger →
+        </a>
+      </div>
+
+      <!-- TABLEAU DE SYNTHÈSE -->
+      <div class="doc-card">
+        <div class="doc-icon">📊</div>
+        <div class="doc-type">Tableau de synthèse</div>
+        <div class="doc-title">Synthèse des compétences</div>
+        <div class="doc-desc">
+          Tableau récapitulatif des compétences et activités professionnelles réalisées en BTS SIO, conforme au référentiel.
+        </div>
+        <div class="doc-meta">
+          <span class="doc-chip">PDF · XLSX</span>
+          <span class="doc-chip">BTS SIO · 2025</span>
+        </div>
+        <!-- Remplace le href par le vrai chemin vers ton fichier -->
+        <a href="tableau-synthese.pdf" class="doc-link" target="_blank" download>
+          Télécharger →
+        </a>
+      </div>
+
+    </div>
+
+    <div class="info-box fade-in fade-in-3">
+      <strong>Note :</strong> Ces documents sont confidentiels et protégés. Merci de ne pas les redistribuer sans autorisation.
+      Pour toute question, contactez-moi à <strong>noahpoivre@example.com</strong>.
+    </div>
+
+  </main>
+
+  <footer>
+    <span>© 2025 Noah Poivre. Tous droits réservés.</span>
+    <span style="color:var(--accent)">BTS SIO · SLAM</span>
+  </footer>
+
+</body>
+</html>
