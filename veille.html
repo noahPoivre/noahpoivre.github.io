@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veille Technologique — Poivre Noah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #121212;
+    --border: #1e1e1e;
+    --accent: #c8f060;
+    --accent2: #60f0c8;
+    --text: #e8e8e0;
+    --muted: #666;
+    --font-display: 'DM Serif Display', serif;
+    --font-mono: 'DM Mono', monospace;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: .85rem;
+    color: var(--accent);
+    letter-spacing: .12em;
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: .75rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    transition: color .2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a.active { color: var(--accent); }
+
+  .nav-back {
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    transition: color .2s;
+    display: flex; align-items: center; gap: .4rem;
+  }
+  .nav-back:hover { color: var(--accent); }
+
+  /* HERO */
+  .page-hero {
+    max-width: 900px; margin: 0 auto;
+    padding: 5rem 3rem 4rem;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    animation: fadeUp .6s ease both;
+  }
+
+  .breadcrumb {
+    font-family: var(--font-mono);
+    font-size: .65rem; color: var(--muted);
+    letter-spacing: .12em; text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: .5rem;
+  }
+
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+
+  .hero-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: .65rem;
+    color: var(--accent);
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    border: 1px solid rgba(200,240,96,.3);
+    padding: .25rem .8rem;
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -.02em;
+    color: var(--text);
+    margin-bottom: 1.2rem;
+  }
+
+  h1 em { font-style: italic; color: var(--accent); }
+
+  .hero-desc {
+    font-size: .95rem; color: var(--muted);
+    max-width: 560px; margin-bottom: 2.5rem; line-height: 1.8;
+  }
+
+  .hero-chips { display: flex; gap: .75rem; flex-wrap: wrap; }
+
+  .chip {
+    display: inline-flex; align-items: center; gap: .4rem;
+    padding: .3rem 1rem;
+    border: 1px solid var(--border); border-radius: 2px;
+    font-family: var(--font-mono);
+    font-size: .65rem; color: var(--muted);
+    background: var(--surface);
+    letter-spacing: .06em;
+  }
+
+  .chip strong { color: var(--accent2); font-weight: 500; }
+
+  /* MAIN */
+  .main {
+    max-width: 900px; margin: 0 auto;
+    padding: 5rem 3rem 6rem;
+  }
+
+  /* SECTION HEADS */
+  .section-head {
+    display: flex; align-items: baseline; gap: 1rem;
+    margin-bottom: 2.5rem; padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-num {
+    font-family: var(--font-mono);
+    font-size: .65rem; color: var(--accent);
+    letter-spacing: .2em; text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-size: 1.5rem; font-weight: 400;
+    color: var(--text); letter-spacing: -.01em;
+  }
+
+  .intro-block { margin-bottom: 5rem; }
+
+  /* TWO COL */
+  .deux-col {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5px; background: var(--border);
+    border: 1.5px solid var(--border);
+    margin-top: 1.5rem;
+  }
+
+  .info-box {
+    background: var(--bg);
+    padding: 2rem 2.2rem;
+    transition: background .2s;
+  }
+
+  .info-box:hover { background: var(--surface); }
+
+  .info-box h3 {
+    font-family: var(--font-display);
+    font-size: 1rem; font-weight: 400;
+    color: var(--text); margin-bottom: .7rem;
+  }
+
+  .info-box p { font-size: .87rem; color: var(--muted); line-height: 1.75; }
+
+  .feedly-badge {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: rgba(96,240,200,.08);
+    border: 1px solid rgba(96,240,200,.2);
+    color: var(--accent2);
+    padding: .3rem .75rem; border-radius: 2px;
+    font-family: var(--font-mono);
+    font-size: .65rem; font-weight: 500;
+    letter-spacing: .1em; text-transform: uppercase;
+    margin-bottom: .8rem;
+  }
+
+  /* TIMELINE */
+  .timeline-block { margin-bottom: 5rem; }
+
+  .tl-item {
+    display: grid; grid-template-columns: 90px 1fr;
+    gap: 2rem; margin-bottom: 0; position: relative;
+  }
+
+  .tl-item:not(:last-child)::before {
+    content: '';
+    position: absolute; left: 44px; top: 38px; bottom: -24px;
+    width: 1px; background: var(--border);
+  }
+
+  .tl-left {
+    display: flex; flex-direction: column;
+    align-items: center; padding-top: 18px; gap: 10px;
+  }
+
+  .tl-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--bg); border: 2px solid var(--accent);
+    flex-shrink: 0; z-index: 1;
+    box-shadow: 0 0 12px rgba(200,240,96,.3);
+  }
+
+  .tl-year {
+    font-family: var(--font-mono);
+    font-size: .62rem; color: var(--muted);
+    text-align: center; line-height: 1.4;
+    letter-spacing: .06em;
+  }
+
+  .tl-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2rem 2.2rem; margin-bottom: 1.5rem;
+    transition: border-color .25s, background .2s;
+    position: relative; overflow: hidden;
+  }
+
+  .tl-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 1px; background: var(--accent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .3s;
+  }
+
+  .tl-card:hover { border-color: rgba(200,240,96,.2); background: #141414; }
+  .tl-card:hover::before { transform: scaleX(1); }
+
+  .tl-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.15rem; font-weight: 400;
+    color: var(--text); margin-bottom: .7rem;
+  }
+
+  .tl-card p {
+    font-size: .87rem; color: var(--muted);
+    margin-bottom: 1.5rem; line-height: 1.75;
+  }
+
+  .tl-sub {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: .75rem; margin-bottom: 1.5rem;
+  }
+
+  .tl-sub-box {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: .9rem 1rem;
+  }
+
+  .tl-sub-label {
+    font-family: var(--font-mono);
+    font-size: .6rem; font-weight: 500;
+    text-transform: uppercase; letter-spacing: .14em;
+    color: var(--accent); margin-bottom: .6rem;
+  }
+
+  .tags-row { display: flex; flex-wrap: wrap; gap: 4px; }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: .65rem; padding: .2rem .6rem;
+    border: 1px solid var(--border);
+    color: var(--muted); font-weight: 400;
+    letter-spacing: .04em;
+    transition: border-color .2s, color .2s;
+  }
+
+  .tl-card:hover .tag { border-color: rgba(200,240,96,.15); }
+
+  .sources-line {
+    display: flex; flex-wrap: wrap; gap: 1rem;
+    padding-top: 1rem; border-top: 1px solid var(--border);
+  }
+
+  .src-link {
+    font-family: var(--font-mono);
+    font-size: .68rem; color: var(--muted);
+    text-decoration: none; letter-spacing: .04em;
+    transition: color .2s;
+  }
+
+  .src-link:hover { color: var(--accent); }
+
+  /* SCHEMA / FLOW */
+  .schema-block { margin-bottom: 5rem; }
+
+  .flow-wrap {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    padding: 3.5rem 2.5rem;
+    display: flex; align-items: flex-start; justify-content: center;
+    flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem;
+  }
+
+  .flow-item {
+    display: flex; flex-direction: column;
+    align-items: center; text-align: center; gap: .8rem;
+    min-width: 110px; max-width: 130px;
+  }
+
+  .flow-circle {
+    width: 64px; height: 64px; border-radius: 50%;
+    border: 1px solid var(--border); background: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    transition: border-color .2s, box-shadow .2s;
+  }
+
+  .flow-item:hover .flow-circle {
+    border-color: var(--accent);
+    box-shadow: 0 0 20px rgba(200,240,96,.15);
+  }
+
+  .flow-name {
+    font-family: var(--font-display);
+    font-size: .9rem; font-weight: 400; color: var(--text);
+  }
+
+  .flow-sub { font-size: .73rem; color: var(--muted); line-height: 1.5; }
+
+  .flow-arrow {
+    color: var(--border); font-family: var(--font-mono);
+    font-size: 1rem; margin-top: 20px; padding: 0 .25rem;
+  }
+
+  /* TABLE */
+  .table-block { margin-bottom: 5rem; }
+
+  .tbl-wrap {
+    border: 1px solid var(--border);
+    overflow: hidden; margin-top: 1.5rem;
+  }
+
+  table { width: 100%; border-collapse: collapse; }
+  thead { background: var(--surface); }
+
+  th {
+    font-family: var(--font-mono);
+    font-size: .62rem; font-weight: 500;
+    text-transform: uppercase; letter-spacing: .14em;
+    color: var(--muted); padding: .9rem 1.2rem;
+    text-align: left; border-bottom: 1px solid var(--border);
+  }
+
+  td {
+    padding: .9rem 1.2rem; font-size: .87rem; color: var(--text);
+    border-bottom: 1px solid var(--border);
+    font-family: var(--font-body); font-weight: 300;
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--surface); }
+
+  .level-wrap { display: flex; align-items: center; gap: .75rem; }
+
+  .bar {
+    flex: 1; height: 2px; background: var(--border);
+    overflow: hidden;
+  }
+
+  .bar-inner { height: 100%; background: var(--accent); }
+
+  .level-lbl {
+    font-family: var(--font-mono);
+    font-size: .65rem; color: var(--muted);
+    white-space: nowrap; min-width: 60px;
+    letter-spacing: .04em;
+  }
+
+  /* ANALYSIS */
+  .analysis-block { margin-bottom: 5rem; }
+
+  .analysis-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5px; background: var(--border);
+    border: 1.5px solid var(--border);
+    margin-top: 1.5rem;
+  }
+
+  .ana-card {
+    padding: 2rem 2.2rem; background: var(--bg);
+    transition: background .2s;
+    position: relative; overflow: hidden;
+  }
+
+  .ana-card::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+
+  .ana-card.pros::after { background: var(--accent); }
+  .ana-card.cons::after { background: #ff6060; }
+  .ana-card:hover { background: var(--surface); }
+
+  .ana-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.05rem; font-weight: 400;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: .5rem;
+  }
+
+  .pros h3 { color: var(--accent); }
+  .cons h3 { color: #ff6060; }
+
+  .ana-item {
+    display: flex; gap: .75rem; margin-bottom: 1rem;
+    font-size: .87rem; color: var(--muted); line-height: 1.65;
+  }
+
+  .ana-item::before {
+    content: '—';
+    font-family: var(--font-mono);
+    color: var(--border); flex-shrink: 0;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border); padding: 2rem 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: var(--font-mono); font-size: .7rem; color: var(--muted);
+  }
+
+  footer a { color: var(--muted); text-decoration: none; transition: color .2s; }
+  footer a:hover { color: var(--accent); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* MOBILE */
+  @media (max-width: 700px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .page-hero, .main { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .deux-col, .analysis-grid { grid-template-columns: 1fr; }
+    .tl-item { grid-template-columns: 56px 1fr; gap: 1rem; }
+    .tl-item::before { left: 27px !important; }
+    .flow-wrap { flex-direction: column; align-items: center; }
+    .flow-arrow { transform: rotate(90deg); margin-top: 0; }
+    footer { flex-direction: column; gap: .5rem; text-align: center; padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">NP.dev</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="index.html#projets">Projets</a></li>
+    <li><a href="index.html#competences">Compétences</a></li>
+    <li><a href="index.html#stages">Stages</a></li>
+    <li><a href="#" class="active">Veille</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">Portfolio</a>
+    <span style="color:var(--border)">›</span>
+    Veille Technologique
+  </div>
+  <div class="hero-tag">// 04 — Veille</div>
+  <h1>L'évolution de <em>l'IA</em><br>dans le développement logiciel</h1>
+  <p class="hero-desc">
+    De l'outil réservé aux experts à l'agent autonome — retour sur une transformation majeure qui redéfinit le métier de développeur.
+  </p>
+  <div class="hero-chips">
+    <div class="chip">📚 <strong>BTS SIO</strong> — 2ème année</div>
+    <div class="chip">📅 Période <strong>2022 – 2025</strong></div>
+    <div class="chip">📡 Outil de veille : <strong>Feedly</strong></div>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- 01 CONTEXTE -->
+  <section class="intro-block reveal">
+    <div class="section-head">
+      <span class="section-num">// 01</span>
+      <h2>Contexte de la veille</h2>
+    </div>
+    <div class="deux-col">
+      <div class="info-box">
+        <h3>Qu'est-ce que la veille technologique ?</h3>
+        <p>La veille technologique consiste à surveiller en continu les évolutions techniques et les innovations pour anticiper les changements et rester à jour dans son domaine professionnel.</p>
+      </div>
+      <div class="info-box">
+        <div class="feedly-badge">📡 Feedly — Lecteur RSS</div>
+        <p>J'ai configuré des flux RSS sur mobile et navigateur, en sélectionnant manuellement des sources variées après des recherches ciblées : blogs techniques, éditeurs, publications de recherche.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 CHRONOLOGIE -->
+  <section class="timeline-block reveal">
+    <div class="section-head">
+      <span class="section-num">// 02</span>
+      <h2>Chronologie de l'évolution</h2>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-dot"></div>
+        <div class="tl-year">Avant<br>2022</div>
+      </div>
+      <div class="tl-card">
+        <h3>Début de l'IA moderne</h3>
+        <p>Avant son intégration massive dans le développement, l'IA était cantonnée à des domaines très spécialisés, réservée aux experts en data science et en recherche.</p>
+        <div class="tl-sub">
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Usages</div>
+            <div class="tags-row">
+              <span class="tag">Reconnaissance d'image</span>
+              <span class="tag">Traduction automatique</span>
+              <span class="tag">Recommandation</span>
+            </div>
+          </div>
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Technologies</div>
+            <div class="tags-row">
+              <span class="tag">Machine Learning</span>
+              <span class="tag">Deep Learning</span>
+            </div>
+          </div>
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Limite</div>
+            <div class="tags-row">
+              <span class="tag">Complexe à utiliser</span>
+              <span class="tag">Réservée aux experts</span>
+            </div>
+          </div>
+        </div>
+        <div class="sources-line">
+          <a class="src-link" href="https://www.ibm.com/cloud/learn/machine-learning" target="_blank">↗ ibm.com — Machine Learning</a>
+          <a class="src-link" href="https://towardsdatascience.com" target="_blank">↗ towardsdatascience.com</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2022<br>2023</div>
+      </div>
+      <div class="tl-card">
+        <h3>Arrivée des IA génératives</h3>
+        <p>Une révolution s'amorce avec des modèles capables de <em style="color:var(--accent);font-style:italic;">générer</em> du contenu à la demande. La démocratisation de l'IA s'accélère et les développeurs adoptent massivement ces nouveaux outils.</p>
+        <div class="tl-sub">
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Modèles phares</div>
+            <div class="tags-row">
+              <span class="tag">ChatGPT</span>
+              <span class="tag">GitHub Copilot</span>
+            </div>
+          </div>
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Nouvelles capacités</div>
+            <div class="tags-row">
+              <span class="tag">Génération de texte</span>
+              <span class="tag">Génération de code</span>
+              <span class="tag">Assistance instantanée</span>
+            </div>
+          </div>
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Impact</div>
+            <div class="tags-row">
+              <span class="tag">Démocratisation</span>
+              <span class="tag">Adoption rapide</span>
+            </div>
+          </div>
+        </div>
+        <div class="sources-line">
+          <a class="src-link" href="https://openai.com/blog/chatgpt" target="_blank">↗ openai.com — ChatGPT</a>
+          <a class="src-link" href="https://github.blog" target="_blank">↗ github.blog</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2023<br>2024</div>
+      </div>
+      <div class="tl-card">
+        <h3>Amélioration rapide des performances</h3>
+        <p>Les modèles progressent en précision et en compréhension contextuelle. Leur intégration dans les environnements de développement quotidiens devient standard.</p>
+        <div class="tl-sub">
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Progrès</div>
+            <div class="tags-row">
+              <span class="tag">Meilleur contexte</span>
+              <span class="tag">Moins d'erreurs</span>
+              <span class="tag">Réponses structurées</span>
+            </div>
+          </div>
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Intégrations</div>
+            <div class="tags-row">
+              <span class="tag">VS Code</span>
+              <span class="tag">JetBrains</span>
+              <span class="tag">Microsoft 365</span>
+              <span class="tag">Cloud</span>
+            </div>
+          </div>
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Usages</div>
+            <div class="tags-row">
+              <span class="tag">Aide au code</span>
+              <span class="tag">Documentation auto</span>
+              <span class="tag">Debug assisté</span>
+            </div>
+          </div>
+        </div>
+        <div class="sources-line">
+          <a class="src-link" href="https://openai.com/index/gpt-4/" target="_blank">↗ openai.com — GPT-4</a>
+          <a class="src-link" href="https://learn.microsoft.com" target="_blank">↗ learn.microsoft.com</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2024<br>2025</div>
+      </div>
+      <div class="tl-card">
+        <h3>L'IA comme copilote du développeur</h3>
+        <p>L'IA devient un véritable partenaire de travail. Elle prend en charge les tâches répétitives, libérant le développeur pour la conception et l'architecture.</p>
+        <div class="tl-sub">
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Ce qu'elle produit</div>
+            <div class="tags-row">
+              <span class="tag">Fonctions complètes</span>
+              <span class="tag">Tests unitaires</span>
+              <span class="tag">Optimisation</span>
+              <span class="tag">Détection failles</span>
+            </div>
+          </div>
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Impact métier</div>
+            <div class="tags-row">
+              <span class="tag">Moins répétitif</span>
+              <span class="tag">Plus de conception</span>
+            </div>
+          </div>
+        </div>
+        <div class="sources-line">
+          <a class="src-link" href="https://openai.com" target="_blank">↗ openai.com</a>
+          <a class="src-link" href="https://research.google" target="_blank">↗ research.google</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2025</div>
+      </div>
+      <div class="tl-card">
+        <h3>Apparition des agents autonomes</h3>
+        <p>Nouvelle frontière : des IA capables d'agir seules sur un projet entier. Elles analysent, planifient et exécutent plusieurs actions en chaîne. La validation humaine reste néanmoins indispensable.</p>
+        <div class="tl-sub">
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Fonctionnement</div>
+            <div class="tags-row">
+              <span class="tag">Analyse du problème</span>
+              <span class="tag">Planification</span>
+              <span class="tag">Exécution en chaîne</span>
+            </div>
+          </div>
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Exemples</div>
+            <div class="tags-row">
+              <span class="tag">Créer une app</span>
+              <span class="tag">Corriger un projet</span>
+              <span class="tag">Automatiser un workflow</span>
+            </div>
+          </div>
+          <div class="tl-sub-box">
+            <div class="tl-sub-label">Limite</div>
+            <div class="tags-row">
+              <span class="tag">Validation humaine requise</span>
+            </div>
+          </div>
+        </div>
+        <div class="sources-line">
+          <a class="src-link" href="https://deepmind.google" target="_blank">↗ deepmind.google</a>
+          <a class="src-link" href="https://openai.com/research" target="_blank">↗ openai.com/research</a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- 03 SCHEMA -->
+  <section class="schema-block reveal">
+    <div class="section-head">
+      <span class="section-num">// 03</span>
+      <h2>Schéma global de l'évolution</h2>
+    </div>
+    <div class="flow-wrap">
+      <div class="flow-item">
+        <div class="flow-circle">🔧</div>
+        <div class="flow-name">Assistant</div>
+        <div class="flow-sub">Aide simple<br>et ponctuelle</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item">
+        <div class="flow-circle">🤝</div>
+        <div class="flow-name">Collaborateur</div>
+        <div class="flow-sub">Interaction<br>avec l'humain</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item">
+        <div class="flow-circle">🚀</div>
+        <div class="flow-name">Copilote</div>
+        <div class="flow-sub">Participation<br>active au code</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item">
+        <div class="flow-circle">🤖</div>
+        <div class="flow-name">Agent autonome</div>
+        <div class="flow-sub">Prise d'initiative<br>et exécution seule</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 TABLE -->
+  <section class="table-block reveal">
+    <div class="section-head">
+      <span class="section-num">// 04</span>
+      <h2>Évolution des usages par période</h2>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Période</th>
+            <th>Rôle de l'IA</th>
+            <th>Niveau d'autonomie</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Avant 2022</td>
+            <td>Outil spécialisé</td>
+            <td><div class="level-wrap"><div class="bar"><div class="bar-inner" style="width:12%"></div></div><span class="level-lbl">Faible</span></div></td>
+          </tr>
+          <tr>
+            <td>2022 – 2023</td>
+            <td>Assistant</td>
+            <td><div class="level-wrap"><div class="bar"><div class="bar-inner" style="width:35%"></div></div><span class="level-lbl">Moyen</span></div></td>
+          </tr>
+          <tr>
+            <td>2023 – 2024</td>
+            <td>Collaborateur</td>
+            <td><div class="level-wrap"><div class="bar"><div class="bar-inner" style="width:60%"></div></div><span class="level-lbl">Élevé</span></div></td>
+          </tr>
+          <tr>
+            <td>2024 – 2025</td>
+            <td>Copilote</td>
+            <td><div class="level-wrap"><div class="bar"><div class="bar-inner" style="width:80%"></div></div><span class="level-lbl">Très élevé</span></div></td>
+          </tr>
+          <tr>
+            <td>2025</td>
+            <td>Agent autonome</td>
+            <td><div class="level-wrap"><div class="bar"><div class="bar-inner" style="width:100%"></div></div><span class="level-lbl">Avancé</span></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 05 ANALYSE -->
+  <section class="analysis-block reveal">
+    <div class="section-head">
+      <span class="section-num">// 05</span>
+      <h2>Analyse critique</h2>
+    </div>
+    <div class="analysis-grid">
+      <div class="ana-card pros">
+        <h3>✅ Avantages</h3>
+        <div class="ana-item">Gain de temps considérable sur les tâches répétitives et de routine</div>
+        <div class="ana-item">Amélioration mesurable de la productivité des équipes de développement</div>
+        <div class="ana-item">Réduction du taux d'erreurs grâce aux analyses automatiques avancées</div>
+        <div class="ana-item">Accélération de l'innovation et du prototypage de nouvelles fonctionnalités</div>
+      </div>
+      <div class="ana-card cons">
+        <h3>⚠️ Inconvénients</h3>
+        <div class="ana-item">Risque de dépendance aux outils, pouvant affaiblir certaines compétences de base</div>
+        <div class="ana-item">Code généré pas toujours fiable ou sécurisé, nécessitant une vérification humaine</div>
+        <div class="ana-item">Questions juridiques sur la propriété intellectuelle et la confidentialité des données</div>
+        <div class="ana-item">Impact potentiel sur certains postes techniques à mesure que l'automatisation progresse</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>© 2025 Noah Poivre — BTS SIO 2ème année</span>
+  <span style="color:var(--accent)">Sources : OpenAI · Google Research · IBM · GitHub · Microsoft</span>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
