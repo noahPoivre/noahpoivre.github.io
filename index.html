@@ -230,12 +230,20 @@
       border: 1.5px solid var(--border);
     }
 
+    /* Make project cards into links */
+    a.project-card {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
     .project-card {
       background: var(--bg);
       padding: 2.5rem;
       transition: background .2s;
       position: relative;
       overflow: hidden;
+      cursor: pointer;
     }
 
     .project-card::before {
@@ -249,8 +257,23 @@
       transition: transform .3s;
     }
 
+    /* Arrow indicator on hover */
+    .project-card::after {
+      content: '→';
+      position: absolute;
+      top: 1.5rem;
+      right: 1.8rem;
+      font-family: var(--font-mono);
+      font-size: .85rem;
+      color: var(--accent);
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity .25s, transform .25s;
+    }
+
     .project-card:hover { background: var(--surface); }
     .project-card:hover::before { transform: scaleX(1); }
+    .project-card:hover::after { opacity: 1; transform: translateX(0); }
 
     .project-icon {
       width: 56px; height: 56px;
@@ -671,21 +694,23 @@
     <h2 class="reveal">Mes Projets</h2>
     <div class="projects-grid reveal">
 
-    <div class="project-card">
-  <img class="project-icon"
-       src="https://cdn-icons-png.flaticon.com/512/3328/3328822.png"
-       alt="CashControl">
-  <p class="project-tag">Kotlin · Base de données</p>
-  <h3>Cash Control</h3>
-  <p>application android de gestion de budget</p>
-</div>
+      <!-- Cash Control → cashcontrol.html -->
+      <a href="cashcontrol.html" class="project-card">
+        <img class="project-icon"
+             src="https://cdn-icons-png.flaticon.com/512/3328/3328822.png"
+             alt="CashControl">
+        <p class="project-tag">Kotlin · Base de données</p>
+        <h3>Cash Control</h3>
+        <p>Application android de gestion de budget</p>
+      </a>
 
-      <div class="project-card">
+      <!-- Cinéma → cinema.html -->
+      <a href="cinema.html" class="project-card">
         <img class="project-icon" src="https://poivrenoah.wordpress.com/wp-content/uploads/2025/11/cinema.png" alt="Cinéma" onerror="this.style.display='none'">
         <p class="project-tag">Développement web</p>
         <h3>Cinéma</h3>
         <p>Projet de gestion et de présentation d'un système lié au domaine du cinéma.</p>
-      </div>
+      </a>
 
     </div>
   </section>
