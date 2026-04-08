@@ -476,15 +476,16 @@
           <span class="tag tag-secondary">PHP</span>
           <span class="tag tag-primary">HTML/CSS</span>
           <span class="tag tag-secondary">MySQL</span>
+          <span class="tag tag-primary">MVC</span>
         </div>
         <h1>Projet<br><em>Cinéma</em></h1>
         <p class="project-hero-desc">
-          Application web de gestion et présentation d'un système cinéma — catalogue de films, gestion des séances et réservation en ligne.
+          Application web de consultation de films — visualisation des informations (titre, description, date, producteur) depuis une base de données MySQL via une architecture MVC.
         </p>
       </div>
       <div class="hero-stats">
         <div class="stat-item">
-          <div class="stat-value">5</div>
+          <div class="stat-value">7</div>
           <div class="stat-label">Tables SQL</div>
         </div>
         <div class="stat-item">
@@ -492,8 +493,8 @@
           <div class="stat-label">Back-end</div>
         </div>
         <div class="stat-item">
-          <div class="stat-value">Web</div>
-          <div class="stat-label">Plateforme</div>
+          <div class="stat-value">AITech</div>
+          <div class="stat-label">Organisation</div>
         </div>
       </div>
     </div>
@@ -507,22 +508,23 @@
         <p class="section-label">// Introduction</p>
         <h2>Présentation du projet</h2>
         <p>
-          Le projet Cinéma est une application web développée en PHP et MySQL dans le cadre du BTS SIO. L'objectif est de proposer une plateforme complète pour la <strong style="color:var(--text)">gestion d'un cinéma</strong> : catalogue de films, programmation des séances et interface de réservation.
+          Le projet Cinéma est une application web développée en PHP et MySQL dans le cadre du BTS SIO, réalisée chez <strong style="color:var(--text)">AITech</strong>. L'objectif est de permettre à tout internaute de <strong style="color:var(--text)">consulter une liste de films</strong> avec leurs informations associées : titre, description, date et producteur.
         </p>
         <p>
-          Le projet suit une architecture MVC claire, séparant la logique métier, la présentation et les données. L'interface est conçue avec HTML et CSS vanilla pour garantir la légèreté et la maintenabilité du code.
+          L'application repose sur une base de données MySQL fournie initialement, hébergée sur une machine distante. Le projet suit une architecture MVC, séparant la logique métier (modèle), la présentation (vue HTML/CSS) et les interactions (contrôleur PHP).
         </p>
         <p>
-          Il couvre les compétences fondamentales du SLAM : gestion de bases de données relationnelles, développement back-end PHP et conception d'interfaces web accessibles.
+          Il couvre les compétences SLAM : conception et développement d'une solution applicative, gestion des données et connexion à une base distante.
         </p>
       </div>
       <div class="intro-card">
+        <div class="info-row"><span class="info-key">Organisation</span><span class="info-val">AITech</span></div>
         <div class="info-row"><span class="info-key">Langages</span><span class="info-val">PHP, HTML, CSS</span></div>
-        <div class="info-row"><span class="info-key">Base de données</span><span class="info-val">MySQL</span></div>
+        <div class="info-row"><span class="info-key">Base de données</span><span class="info-val">MySQL (distante)</span></div>
         <div class="info-row"><span class="info-key">Architecture</span><span class="info-val">MVC</span></div>
-        <div class="info-row"><span class="info-key">Hébergement</span><span class="info-val">WAMP / Serveur local</span></div>
-        <div class="info-row"><span class="info-key">Type</span><span class="info-val">Projet BTS SIO — SLAM</span></div>
-        <div class="info-row"><span class="info-key">Statut</span><span class="info-val" style="color:var(--accent)">✓ Terminé</span></div>
+        <div class="info-row"><span class="info-key">Lieu</span><span class="info-val">Saint-Joseph</span></div>
+        <div class="info-row"><span class="info-key">Date</span><span class="info-val">19 / 03 / 2026</span></div>
+        <div class="info-row"><span class="info-key">Statut</span><span class="info-val" style="color:#f0c860">⏳ En cours</span></div>
       </div>
     </div>
 
@@ -539,52 +541,65 @@
           <h3>Schéma de la base de données</h3>
           <div class="db-schema">
             <div class="db-table">
-              <div class="db-table-header">🎬 films</div>
+              <div class="db-table-header">🎬 Film</div>
               <div class="db-fields">
                 <span class="db-field pk">id_film PK</span>
                 <span class="db-field">titre</span>
-                <span class="db-field">genre</span>
-                <span class="db-field">duree</span>
-                <span class="db-field">synopsis</span>
-                <span class="db-field">affiche</span>
+                <span class="db-field fk">id_genre FK</span>
+                <span class="db-field fk">id_pays FK</span>
+                <span class="db-field">date_sortie</span>
+                <span class="db-field">description</span>
+                <span class="db-field">producteur</span>
               </div>
             </div>
             <div class="db-table">
-              <div class="db-table-header">🎭 seances</div>
+              <div class="db-table-header">🎭 Artiste</div>
               <div class="db-fields">
-                <span class="db-field pk">id_seance PK</span>
+                <span class="db-field pk">id_artiste PK</span>
+                <span class="db-field">nom</span>
+                <span class="db-field">prenom</span>
+                <span class="db-field">date_naissance</span>
+              </div>
+            </div>
+            <div class="db-table">
+              <div class="db-table-header">🎭 Role</div>
+              <div class="db-fields">
+                <span class="db-field pk">id_role PK</span>
                 <span class="db-field fk">id_film FK</span>
-                <span class="db-field fk">id_salle FK</span>
-                <span class="db-field">date_heure</span>
-                <span class="db-field">tarif</span>
+                <span class="db-field fk">id_artiste FK</span>
+                <span class="db-field">nom_role</span>
               </div>
             </div>
             <div class="db-table">
-              <div class="db-table-header">🎟️ reservations</div>
+              <div class="db-table-header">🏷️ Genre</div>
               <div class="db-fields">
-                <span class="db-field pk">id_resa PK</span>
-                <span class="db-field fk">id_seance FK</span>
-                <span class="db-field fk">id_user FK</span>
-                <span class="db-field">nb_places</span>
-                <span class="db-field">date_resa</span>
+                <span class="db-field pk">id_genre PK</span>
+                <span class="db-field">libelle</span>
               </div>
             </div>
             <div class="db-table">
-              <div class="db-table-header">🏛️ salles</div>
+              <div class="db-table-header">🌍 Pays</div>
               <div class="db-fields">
-                <span class="db-field pk">id_salle PK</span>
-                <span class="db-field">nom</span>
-                <span class="db-field">capacite</span>
+                <span class="db-field pk">id_pays PK</span>
+                <span class="db-field">libelle</span>
               </div>
             </div>
             <div class="db-table">
-              <div class="db-table-header">👤 utilisateurs</div>
+              <div class="db-table-header">👤 Internaute</div>
               <div class="db-fields">
-                <span class="db-field pk">id_user PK</span>
-                <span class="db-field">nom</span>
+                <span class="db-field pk">id_internaute PK</span>
+                <span class="db-field">login</span>
+                <span class="db-field">mdp</span>
                 <span class="db-field">email</span>
-                <span class="db-field">mdp_hash</span>
-                <span class="db-field">role</span>
+              </div>
+            </div>
+            <div class="db-table">
+              <div class="db-table-header">⭐ Notation</div>
+              <div class="db-fields">
+                <span class="db-field fk">id_internaute FK</span>
+                <span class="db-field fk">id_film FK</span>
+                <span class="db-field">note</span>
+                <span class="db-field">commentaire</span>
               </div>
             </div>
           </div>
@@ -616,11 +631,9 @@
             <div style="font-family:var(--font-mono);font-size:.72rem;color:var(--accent2);letter-spacing:.14em;text-transform:uppercase;margin-bottom:1rem;">Pages du site</div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;">
               <div style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:.7rem 1rem;font-family:var(--font-mono);font-size:.68rem;color:var(--muted);">🏠 Accueil</div>
-              <div style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:.7rem 1rem;font-family:var(--font-mono);font-size:.68rem;color:var(--muted);">🎬 Catalogue</div>
-              <div style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:.7rem 1rem;font-family:var(--font-mono);font-size:.68rem;color:var(--muted);">📅 Séances</div>
-              <div style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:.7rem 1rem;font-family:var(--font-mono);font-size:.68rem;color:var(--muted);">🎟️ Réservation</div>
-              <div style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:.7rem 1rem;font-family:var(--font-mono);font-size:.68rem;color:var(--muted);">👤 Connexion</div>
-              <div style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:.7rem 1rem;font-family:var(--font-mono);font-size:.68rem;color:var(--muted);">⚙️ Admin</div>
+              <div style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:.7rem 1rem;font-family:var(--font-mono);font-size:.68rem;color:var(--muted);">🎬 Liste des films</div>
+              <div style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:.7rem 1rem;font-family:var(--font-mono);font-size:.68rem;color:var(--muted);">🔍 Détail film</div>
+              <div style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:.7rem 1rem;font-family:var(--font-mono);font-size:.68rem;color:var(--muted);">🎭 Artistes</div>
             </div>
           </div>
         </div>
@@ -640,10 +653,9 @@
           <div class="mvc-title">Vue</div>
           <ul class="mvc-items">
             <li>accueil.php</li>
-            <li>catalogue.php</li>
-            <li>seances.php</li>
-            <li>reservation.php</li>
-            <li>admin.php</li>
+            <li>liste_films.php</li>
+            <li>detail_film.php</li>
+            <li>artistes.php</li>
           </ul>
         </div>
         <div class="mvc-card">
@@ -651,10 +663,9 @@
           <div class="mvc-title">Contrôleur</div>
           <ul class="mvc-items">
             <li>FilmController</li>
-            <li>SeanceController</li>
-            <li>ResaController</li>
-            <li>AuthController</li>
-            <li>AdminController</li>
+            <li>ArtisteController</li>
+            <li>GenreController</li>
+            <li>NotationController</li>
           </ul>
         </div>
         <div class="mvc-card">
@@ -662,10 +673,10 @@
           <div class="mvc-title">Modèle</div>
           <ul class="mvc-items">
             <li>Film.php</li>
-            <li>Seance.php</li>
-            <li>Reservation.php</li>
-            <li>Utilisateur.php</li>
-            <li>Salle.php</li>
+            <li>Artiste.php</li>
+            <li>Genre.php</li>
+            <li>Notation.php</li>
+            <li>Pays.php</li>
           </ul>
         </div>
       </div>
@@ -681,38 +692,38 @@
         <div class="feature-card">
           <div class="feature-num">01</div>
           <div class="feature-icon">🎬</div>
-          <h3>Catalogue de films</h3>
-          <p>Affichage des films avec affiche, synopsis, genre et durée.</p>
+          <h3>Liste des films</h3>
+          <p>Affichage dynamique de tous les films depuis la base de données MySQL.</p>
         </div>
         <div class="feature-card">
           <div class="feature-num">02</div>
-          <div class="feature-icon">📅</div>
-          <h3>Gestion des séances</h3>
-          <p>Planning des séances par salle avec horaires et tarifs.</p>
+          <div class="feature-icon">🔍</div>
+          <h3>Détail d'un film</h3>
+          <p>Consultation des informations complètes : titre, description, date et producteur.</p>
         </div>
         <div class="feature-card">
           <div class="feature-num">03</div>
-          <div class="feature-icon">🎟️</div>
-          <h3>Réservation en ligne</h3>
-          <p>Sélection du nombre de places et confirmation de réservation.</p>
+          <div class="feature-icon">🎭</div>
+          <h3>Artistes & Rôles</h3>
+          <p>Affichage des artistes associés à chaque film avec leurs rôles respectifs.</p>
         </div>
         <div class="feature-card">
           <div class="feature-num">04</div>
-          <div class="feature-icon">🔐</div>
-          <h3>Authentification</h3>
-          <p>Système de connexion sécurisé avec gestion des rôles utilisateur/admin.</p>
+          <div class="feature-icon">🏷️</div>
+          <h3>Genre & Pays</h3>
+          <p>Catégorisation des films par genre et pays de production.</p>
         </div>
         <div class="feature-card">
           <div class="feature-num">05</div>
-          <div class="feature-icon">⚙️</div>
-          <h3>Interface admin</h3>
-          <p>Back-office pour gérer les films, séances et réservations.</p>
+          <div class="feature-icon">🌐</div>
+          <h3>Accès libre</h3>
+          <p>Interface consultable par tout internaute sans authentification requise.</p>
         </div>
         <div class="feature-card">
           <div class="feature-num">06</div>
-          <div class="feature-icon">📱</div>
-          <h3>Design responsive</h3>
-          <p>Interface adaptée aux mobiles, tablettes et desktops.</p>
+          <div class="feature-icon">💾</div>
+          <h3>BDD distante</h3>
+          <p>Connexion à un serveur MySQL distant via une machine virtuelle dédiée.</p>
         </div>
       </div>
     </div>
@@ -726,28 +737,28 @@
       <div class="timeline">
         <div class="tl-item">
           <div class="tl-label">Phase 1</div>
-          <div class="tl-title">Analyse des besoins</div>
-          <div class="tl-desc">Définition des cas d'usage, diagrammes UML (cas d'utilisation, classes), cahier des charges fonctionnel.</div>
+          <div class="tl-title">Analyse & prise en main</div>
+          <div class="tl-desc">Lecture du cahier des charges, découverte de la base de données fournie (7 tables), identification des besoins fonctionnels.</div>
         </div>
         <div class="tl-item">
           <div class="tl-label">Phase 2</div>
-          <div class="tl-title">Modélisation de la BDD</div>
-          <div class="tl-desc">Conception du MCD et MLD, création des tables MySQL, définition des contraintes d'intégrité et des clés étrangères.</div>
+          <div class="tl-title">Mise en place de l'environnement</div>
+          <div class="tl-desc">Configuration des deux machines virtuelles (serveur web + serveur BDD), paramétrage de la connexion réseau distante.</div>
         </div>
         <div class="tl-item">
           <div class="tl-label">Phase 3</div>
-          <div class="tl-title">Développement back-end</div>
-          <div class="tl-desc">Implémentation PHP des modèles, contrôleurs, requêtes PDO et gestion des sessions.</div>
+          <div class="tl-title">Architecture MVC & modèles</div>
+          <div class="tl-desc">Structuration du projet en MVC, développement des modèles PHP (requêtes MySQL via PDO) pour Film, Artiste, Genre, Pays, Notation.</div>
         </div>
         <div class="tl-item">
           <div class="tl-label">Phase 4</div>
-          <div class="tl-title">Développement front-end</div>
-          <div class="tl-desc">Création des vues HTML/CSS, mise en page responsive, intégration des formulaires et des tables d'affichage.</div>
+          <div class="tl-title">Développement des vues</div>
+          <div class="tl-desc">Création des pages HTML/CSS : liste des films, page de détail, affichage dynamique des données récupérées depuis la BDD.</div>
         </div>
         <div class="tl-item" style="padding-bottom:0">
           <div class="tl-label">Phase 5</div>
-          <div class="tl-title">Tests & Déploiement</div>
-          <div class="tl-desc">Tests fonctionnels, vérification de la sécurité (injections SQL, XSS), déploiement sur serveur WAMP local.</div>
+          <div class="tl-title">Tests & résolution des difficultés</div>
+          <div class="tl-desc">Résolution de la connexion à la BDD distante, tests fonctionnels, vérification de l'affichage correct de toutes les informations.</div>
         </div>
       </div>
     </div>
@@ -759,16 +770,16 @@
       <p class="section-label">// Stack Technique</p>
       <h2>Technologies utilisées</h2>
       <div class="stack-pills">
-        <div class="pill"><span class="pill-dot"></span>PHP 8</div>
+        <div class="pill"><span class="pill-dot"></span>PHP</div>
         <div class="pill"><span class="pill-dot"></span>MySQL</div>
         <div class="pill"><span class="pill-dot"></span>HTML5</div>
         <div class="pill"><span class="pill-dot"></span>CSS3</div>
         <div class="pill"><span class="pill-dot"></span>PDO</div>
         <div class="pill"><span class="pill-dot"></span>Architecture MVC</div>
-        <div class="pill"><span class="pill-dot"></span>WAMP</div>
+        <div class="pill"><span class="pill-dot"></span>Machine virtuelle</div>
+        <div class="pill"><span class="pill-dot"></span>Serveur web dédié</div>
+        <div class="pill"><span class="pill-dot"></span>Serveur BDD distant</div>
         <div class="pill"><span class="pill-dot"></span>phpMyAdmin</div>
-        <div class="pill"><span class="pill-dot"></span>VS Code</div>
-        <div class="pill"><span class="pill-dot"></span>GitHub</div>
       </div>
     </div>
 
