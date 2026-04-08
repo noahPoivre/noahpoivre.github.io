@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cash Control — Poivre Noah</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --surface: #121212;
+      --border: #1e1e1e;
+      --accent: #c8f060;
+      --accent2: #60f0c8;
+      --text: #e8e8e0;
+      --muted: #666;
+      --font-display: 'DM Serif Display', serif;
+      --font-mono: 'DM Mono', monospace;
+      --font-body: 'DM Sans', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+    }
+    .nav-logo {
+      font-family: var(--font-mono);
+      font-size: .85rem;
+      color: var(--accent);
+      letter-spacing: .12em;
+      text-decoration: none;
+    }
+    .nav-back {
+      font-family: var(--font-mono);
+      font-size: .78rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      transition: color .2s;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .nav-back:hover { color: var(--accent); }
+
+    /* HERO PROJECT */
+    .project-hero {
+      min-height: 60vh;
+      display: flex;
+      align-items: flex-end;
+      padding: 10rem 3rem 4rem;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(200,240,96,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,240,96,.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 700px; height: 500px;
+      background: radial-gradient(ellipse, rgba(200,240,96,.07) 0%, transparent 70%);
+      top: 20%; left: -10%;
+      pointer-events: none;
+    }
+    .project-hero-inner {
+      position: relative;
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: flex-end;
+      gap: 2rem;
+    }
+    .project-hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      padding: .25rem .7rem;
+      border-radius: 2px;
+    }
+    .tag-primary { background: rgba(200,240,96,.12); color: var(--accent); border: 1px solid rgba(200,240,96,.25); }
+    .tag-secondary { background: rgba(96,240,200,.08); color: var(--accent2); border: 1px solid rgba(96,240,200,.2); }
+    .project-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 1.0;
+      letter-spacing: -.02em;
+    }
+    .project-hero h1 em { font-style: italic; color: var(--accent); }
+    .project-hero-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 540px;
+      margin-top: 1.2rem;
+    }
+    .hero-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      text-align: right;
+    }
+    .stat-item {
+      border-right: 2px solid var(--accent);
+      padding-right: 1.2rem;
+    }
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      color: var(--muted);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    /* CONTENT */
+    .content-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 3rem;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      color: var(--accent);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin-bottom: .8rem;
+    }
+    h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    h3 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      margin-bottom: .8rem;
+    }
+
+    .intro-block {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 4rem;
+      margin-bottom: 5rem;
+      align-items: start;
+    }
+    .intro-text p {
+      color: var(--muted);
+      font-size: .95rem;
+      margin-bottom: 1rem;
+    }
+    .intro-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .intro-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: .75rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: .88rem;
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-key {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--muted);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .info-val { color: var(--text); font-size: .9rem; }
+
+    /* CHART SECTIONS */
+    .charts-section { margin-bottom: 5rem; }
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .chart-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2rem;
+      position: relative;
+    }
+    .chart-card h3 {
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      color: var(--accent);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: 1.8rem;
+    }
+
+    /* BAR CHART */
+    .bar-chart { display: flex; flex-direction: column; gap: .9rem; }
+    .bar-row { display: flex; flex-direction: column; gap: .3rem; }
+    .bar-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--muted);
+      letter-spacing: .06em;
+    }
+    .bar-track {
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform-origin: left;
+      animation: barGrow 1s cubic-bezier(.4,0,.2,1) both;
+    }
+    @keyframes barGrow {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
+    }
+
+    /* DONUT CHART */
+    .donut-wrap {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      justify-content: center;
+    }
+    .donut-svg { flex-shrink: 0; }
+    .donut-legend { display: flex; flex-direction: column; gap: .6rem; }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      color: var(--muted);
+      letter-spacing: .05em;
+    }
+    .legend-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ARCHITECTURE */
+    .arch-section { margin-bottom: 5rem; }
+    .arch-flow {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-top: 2rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+    }
+    .arch-node {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.4rem 1.8rem;
+      text-align: center;
+      min-width: 140px;
+      transition: border-color .2s;
+      flex-shrink: 0;
+    }
+    .arch-node:hover { border-color: rgba(200,240,96,.35); }
+    .arch-node-icon { font-size: 1.6rem; margin-bottom: .6rem; }
+    .arch-node-title {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      color: var(--accent);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .arch-node-sub {
+      font-size: .78rem;
+      color: var(--muted);
+      margin-top: .3rem;
+    }
+    .arch-arrow {
+      font-family: var(--font-mono);
+      color: var(--accent);
+      font-size: 1.2rem;
+      padding: 0 .5rem;
+      flex-shrink: 0;
+    }
+
+    /* FEATURES */
+    .features-section { margin-bottom: 5rem; }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.8rem;
+      position: relative;
+      overflow: hidden;
+      transition: background .2s, border-color .2s;
+    }
+    .feature-card:hover { background: #161616; border-color: rgba(200,240,96,.2); }
+    .feature-icon { font-size: 1.6rem; margin-bottom: 1rem; }
+    .feature-card h3 { font-family: var(--font-display); font-size: 1.1rem; margin-bottom: .5rem; }
+    .feature-card p { font-size: .85rem; color: var(--muted); }
+    .feature-num {
+      position: absolute;
+      top: 1rem; right: 1.2rem;
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      color: rgba(200,240,96,.3);
+      letter-spacing: .1em;
+    }
+
+    /* TIMELINE */
+    .timeline-section { margin-bottom: 5rem; }
+    .timeline {
+      position: relative;
+      margin-top: 2.5rem;
+      padding-left: 2rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+    }
+    .tl-item {
+      position: relative;
+      padding: 0 0 2.5rem 2rem;
+    }
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -4px; top: 6px;
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(200,240,96,.5);
+    }
+    .tl-label {
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      color: var(--accent);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: .3rem;
+    }
+    .tl-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      margin-bottom: .4rem;
+    }
+    .tl-desc { font-size: .88rem; color: var(--muted); }
+
+    /* TECH STACK */
+    .stack-section { margin-bottom: 5rem; }
+    .stack-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+      margin-top: 2rem;
+    }
+    .pill {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: .5rem 1.2rem;
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      color: var(--text);
+      letter-spacing: .06em;
+      transition: border-color .2s, color .2s;
+    }
+    .pill:hover { border-color: var(--accent); color: var(--accent); }
+    .pill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); }
+
+    /* DIVIDER */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      color: var(--muted);
+    }
+
+    /* REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media(max-width:768px) {
+      nav { padding: 1rem 1.5rem; }
+      .project-hero { padding: 8rem 1.5rem 3rem; }
+      .project-hero-inner { grid-template-columns: 1fr; }
+      .hero-stats { flex-direction: row; text-align: left; }
+      .stat-item { border-right: none; border-left: 2px solid var(--accent); padding-right: 0; padding-left: 1rem; }
+      .content-wrapper { padding: 3rem 1.5rem; }
+      .intro-block { grid-template-columns: 1fr; gap: 2rem; }
+      .charts-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: .5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">NP.dev</a>
+    <a class="nav-back" href="index.html#projets">← Retour aux projets</a>
+  </nav>
+
+  <!-- PROJECT HERO -->
+  <div class="project-hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="project-hero-inner">
+      <div>
+        <div class="project-hero-meta">
+          <span class="tag tag-primary">Kotlin</span>
+          <span class="tag tag-secondary">Android</span>
+          <span class="tag tag-primary">Base de données</span>
+        </div>
+        <h1>Cash<br><em>Control</em></h1>
+        <p class="project-hero-desc">
+          Application Android de gestion de budget personnel — suivi des dépenses, catégorisation et visualisation des finances en temps réel.
+        </p>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-value">3</div>
+          <div class="stat-label">Modules</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">SQLite</div>
+          <div class="stat-label">Base de données</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">BTS</div>
+          <div class="stat-label">Contexte</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-wrapper">
+
+    <!-- INTRO -->
+    <div class="intro-block reveal">
+      <div class="intro-text">
+        <p class="section-label">// Introduction</p>
+        <h2>Présentation du projet</h2>
+        <p>
+          Cash Control est une application mobile Android développée en Kotlin dans le cadre du BTS SIO. Elle répond à un besoin concret : permettre à l'utilisateur de <strong style="color:var(--text)">suivre ses finances personnelles</strong> de manière simple et visuelle, sans dépendre d'un service cloud.
+        </p>
+        <p>
+          L'application stocke toutes les données en local via SQLite, garantissant la confidentialité et une utilisation hors-ligne complète.
+        </p>
+        <p>
+          Le projet couvre l'intégralité du cycle de développement Android : conception de l'interface, modélisation de la base de données, logique métier et tests.
+        </p>
+      </div>
+      <div class="intro-card">
+        <div class="info-row">
+          <span class="info-key">Langage</span>
+          <span class="info-val">Kotlin</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">Plateforme</span>
+          <span class="info-val">Android</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">Stockage</span>
+          <span class="info-val">SQLite (local)</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">IDE</span>
+          <span class="info-val">Android Studio</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">Type</span>
+          <span class="info-val">Projet BTS SIO — SLAM</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">Statut</span>
+          <span class="info-val" style="color:var(--accent)">✓ Terminé</span>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- CHARTS -->
+    <div class="charts-section reveal" style="margin-top:4rem;">
+      <p class="section-label">// Données & Visualisation</p>
+      <h2>Répartition & Architecture</h2>
+      <div class="charts-grid">
+
+        <!-- Bar chart : temps passé par module -->
+        <div class="chart-card">
+          <h3>Temps de dev par module</h3>
+          <div class="bar-chart">
+            <div class="bar-row">
+              <div class="bar-label-row"><span>UI / Interfaces</span><span>40%</span></div>
+              <div class="bar-track"><div class="bar-fill" style="width:40%; animation-delay:.1s"></div></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-label-row"><span>Base de données</span><span>30%</span></div>
+              <div class="bar-track"><div class="bar-fill" style="width:30%; animation-delay:.25s"></div></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-label-row"><span>Logique métier</span><span>20%</span></div>
+              <div class="bar-track"><div class="bar-fill" style="width:20%; animation-delay:.4s"></div></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-label-row"><span>Tests & Debug</span><span>10%</span></div>
+              <div class="bar-track"><div class="bar-fill" style="width:10%; animation-delay:.55s"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Donut : catégories de dépenses gérées -->
+        <div class="chart-card">
+          <h3>Catégories de dépenses</h3>
+          <div class="donut-wrap">
+            <svg class="donut-svg" width="110" height="110" viewBox="0 0 110 110">
+              <circle cx="55" cy="55" r="40" fill="none" stroke="#1e1e1e" stroke-width="18"/>
+              <!-- Nourriture 35% -->
+              <circle cx="55" cy="55" r="40" fill="none" stroke="#c8f060" stroke-width="18"
+                stroke-dasharray="87.96 263.88" stroke-dashoffset="0"
+                transform="rotate(-90 55 55)">
+                <animate attributeName="stroke-dasharray" from="0 351.84" to="87.96 263.88" dur="1s" fill="freeze"/>
+              </circle>
+              <!-- Transport 25% -->
+              <circle cx="55" cy="55" r="40" fill="none" stroke="#60f0c8" stroke-width="18"
+                stroke-dasharray="62.83 289.01" stroke-dashoffset="-87.96"
+                transform="rotate(-90 55 55)">
+                <animate attributeName="stroke-dasharray" from="0 351.84" to="62.83 289.01" dur="1s" begin=".2s" fill="freeze"/>
+              </circle>
+              <!-- Loisirs 20% -->
+              <circle cx="55" cy="55" r="40" fill="none" stroke="#f0c860" stroke-width="18"
+                stroke-dasharray="50.27 301.57" stroke-dashoffset="-150.79"
+                transform="rotate(-90 55 55)">
+                <animate attributeName="stroke-dasharray" from="0 351.84" to="50.27 301.57" dur="1s" begin=".35s" fill="freeze"/>
+              </circle>
+              <!-- Autres 20% -->
+              <circle cx="55" cy="55" r="40" fill="none" stroke="#f060a8" stroke-width="18"
+                stroke-dasharray="50.27 301.57" stroke-dashoffset="-201.06"
+                transform="rotate(-90 55 55)">
+                <animate attributeName="stroke-dasharray" from="0 351.84" to="50.27 301.57" dur="1s" begin=".5s" fill="freeze"/>
+              </circle>
+              <circle cx="55" cy="55" r="31" fill="#121212"/>
+              <text x="55" y="58" text-anchor="middle" fill="#e8e8e0" font-family="DM Mono,monospace" font-size="8">4 types</text>
+            </svg>
+            <div class="donut-legend">
+              <div class="legend-item"><span class="legend-dot" style="background:#c8f060"></span>Nourriture — 35%</div>
+              <div class="legend-item"><span class="legend-dot" style="background:#60f0c8"></span>Transport — 25%</div>
+              <div class="legend-item"><span class="legend-dot" style="background:#f0c860"></span>Loisirs — 20%</div>
+              <div class="legend-item"><span class="legend-dot" style="background:#f060a8"></span>Autres — 20%</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ARCHITECTURE -->
+    <div class="arch-section reveal" style="margin-top:4rem;">
+      <p class="section-label">// Technique</p>
+      <h2>Architecture du projet</h2>
+      <div class="arch-flow">
+        <div class="arch-node">
+          <div class="arch-node-icon">📱</div>
+          <div class="arch-node-title">UI Layer</div>
+          <div class="arch-node-sub">Activities & Fragments</div>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-node">
+          <div class="arch-node-icon">⚙️</div>
+          <div class="arch-node-title">ViewModel</div>
+          <div class="arch-node-sub">Logique métier</div>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-node">
+          <div class="arch-node-icon">🗄️</div>
+          <div class="arch-node-title">Repository</div>
+          <div class="arch-node-sub">Couche d'abstraction</div>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-node">
+          <div class="arch-node-icon">💾</div>
+          <div class="arch-node-title">SQLite DB</div>
+          <div class="arch-node-sub">Stockage local</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- FEATURES -->
+    <div class="features-section reveal" style="margin-top:4rem;">
+      <p class="section-label">// Fonctionnalités</p>
+      <h2>Ce que fait l'application</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-num">01</div>
+          <div class="feature-icon">💰</div>
+          <h3>Suivi des dépenses</h3>
+          <p>Ajout rapide de transactions avec montant, date, catégorie et description.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-num">02</div>
+          <div class="feature-icon">📊</div>
+          <h3>Visualisation</h3>
+          <p>Graphiques de répartition par catégorie et évolution mensuelle du solde.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-num">03</div>
+          <div class="feature-icon">🏷️</div>
+          <h3>Catégorisation</h3>
+          <p>Organisation des dépenses par catégories personnalisables.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-num">04</div>
+          <div class="feature-icon">📅</div>
+          <h3>Historique</h3>
+          <p>Consultation des transactions passées avec filtrage par période.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-num">05</div>
+          <div class="feature-icon">🔒</div>
+          <h3>Hors-ligne & Privé</h3>
+          <p>Toutes les données restent en local, aucune connexion requise.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-num">06</div>
+          <div class="feature-icon">🎯</div>
+          <h3>Budget cible</h3>
+          <p>Définition d'un budget mensuel et alerte en cas de dépassement.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- TIMELINE -->
+    <div class="timeline-section reveal" style="margin-top:4rem;">
+      <p class="section-label">// Déroulement</p>
+      <h2>Étapes du développement</h2>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-label">Phase 1</div>
+          <div class="tl-title">Analyse & Conception</div>
+          <div class="tl-desc">Définition du cahier des charges, modélisation de la base de données, maquettage des interfaces sous Figma.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-label">Phase 2</div>
+          <div class="tl-title">Mise en place de la BDD</div>
+          <div class="tl-desc">Création des tables SQLite (transactions, catégories, utilisateur), implémentation du DAO et des requêtes CRUD.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-label">Phase 3</div>
+          <div class="tl-title">Développement des interfaces</div>
+          <div class="tl-desc">Création des Activities et Fragments en Kotlin, intégration des RecyclerViews et des composants Material Design.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-label">Phase 4</div>
+          <div class="tl-title">Logique métier & graphiques</div>
+          <div class="tl-desc">Implémentation des calculs de budget, génération des graphiques de statistiques et gestion des alertes.</div>
+        </div>
+        <div class="tl-item" style="padding-bottom:0">
+          <div class="tl-label">Phase 5</div>
+          <div class="tl-title">Tests & finalisation</div>
+          <div class="tl-desc">Tests sur émulateur et appareil physique, correction des bugs, optimisation des performances.</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- TECH STACK -->
+    <div class="stack-section reveal" style="margin-top:4rem;">
+      <p class="section-label">// Stack Technique</p>
+      <h2>Technologies utilisées</h2>
+      <div class="stack-pills">
+        <div class="pill"><span class="pill-dot"></span>Kotlin</div>
+        <div class="pill"><span class="pill-dot"></span>Android SDK</div>
+        <div class="pill"><span class="pill-dot"></span>SQLite</div>
+        <div class="pill"><span class="pill-dot"></span>Android Studio</div>
+        <div class="pill"><span class="pill-dot"></span>Material Design</div>
+        <div class="pill"><span class="pill-dot"></span>RecyclerView</div>
+        <div class="pill"><span class="pill-dot"></span>ViewModel</div>
+        <div class="pill"><span class="pill-dot"></span>LiveData</div>
+        <div class="pill"><span class="pill-dot"></span>Figma</div>
+        <div class="pill"><span class="pill-dot"></span>GitHub</div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <span>© 2025 Noah Poivre. Tous droits réservés.</span>
+    <span style="color:var(--accent)">BTS SIO · SLAM</span>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
