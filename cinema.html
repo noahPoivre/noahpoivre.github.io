@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cinéma — Poivre Noah</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --surface: #121212;
+      --border: #1e1e1e;
+      --accent: #c8f060;
+      --accent2: #60f0c8;
+      --text: #e8e8e0;
+      --muted: #666;
+      --font-display: 'DM Serif Display', serif;
+      --font-mono: 'DM Mono', monospace;
+      --font-body: 'DM Sans', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+    }
+    .nav-logo {
+      font-family: var(--font-mono);
+      font-size: .85rem;
+      color: var(--accent);
+      letter-spacing: .12em;
+      text-decoration: none;
+    }
+    .nav-back {
+      font-family: var(--font-mono);
+      font-size: .78rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      transition: color .2s;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .nav-back:hover { color: var(--accent); }
+
+    .project-hero {
+      min-height: 60vh;
+      display: flex;
+      align-items: flex-end;
+      padding: 10rem 3rem 4rem;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(96,240,200,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(96,240,200,.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 700px; height: 500px;
+      background: radial-gradient(ellipse, rgba(96,240,200,.07) 0%, transparent 70%);
+      top: 20%; right: -10%;
+      pointer-events: none;
+    }
+    .project-hero-inner {
+      position: relative;
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: flex-end;
+      gap: 2rem;
+    }
+    .project-hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      padding: .25rem .7rem;
+      border-radius: 2px;
+    }
+    .tag-primary { background: rgba(200,240,96,.12); color: var(--accent); border: 1px solid rgba(200,240,96,.25); }
+    .tag-secondary { background: rgba(96,240,200,.08); color: var(--accent2); border: 1px solid rgba(96,240,200,.2); }
+    .project-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 1.0;
+      letter-spacing: -.02em;
+    }
+    .project-hero h1 em { font-style: italic; color: var(--accent2); }
+    .project-hero-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 540px;
+      margin-top: 1.2rem;
+    }
+    .hero-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      text-align: right;
+    }
+    .stat-item {
+      border-right: 2px solid var(--accent2);
+      padding-right: 1.2rem;
+    }
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      color: var(--accent2);
+      line-height: 1;
+    }
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      color: var(--muted);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .content-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 3rem;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      color: var(--accent);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin-bottom: .8rem;
+    }
+    h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    h3 { font-family: var(--font-display); font-size: 1.3rem; margin-bottom: .8rem; }
+
+    .intro-block {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 4rem;
+      margin-bottom: 5rem;
+      align-items: start;
+    }
+    .intro-text p { color: var(--muted); font-size: .95rem; margin-bottom: 1rem; }
+    .intro-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .intro-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent2), var(--accent));
+    }
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: .75rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: .88rem;
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-key { font-family: var(--font-mono); font-size: .68rem; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+    .info-val { color: var(--text); font-size: .9rem; }
+
+    .charts-section { margin-bottom: 5rem; }
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .chart-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2rem;
+    }
+    .chart-card h3 {
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      color: var(--accent2);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: 1.8rem;
+    }
+
+    /* DB SCHEMA */
+    .db-schema {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .db-table {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .db-table-header {
+      background: rgba(96,240,200,.08);
+      border-bottom: 1px solid var(--border);
+      padding: .6rem 1rem;
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      color: var(--accent2);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .db-fields {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      padding: .8rem 1rem;
+    }
+    .db-field {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      padding: .2rem .5rem;
+      border-radius: 2px;
+      background: var(--surface);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .db-field.pk { color: var(--accent); border-color: rgba(200,240,96,.25); }
+    .db-field.fk { color: var(--accent2); border-color: rgba(96,240,200,.25); }
+
+    /* BAR CHART */
+    .bar-chart { display: flex; flex-direction: column; gap: .9rem; }
+    .bar-row { display: flex; flex-direction: column; gap: .3rem; }
+    .bar-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--muted);
+      letter-spacing: .06em;
+    }
+    .bar-track { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+    .bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--accent2), var(--accent));
+      transform-origin: left;
+      animation: barGrow 1s cubic-bezier(.4,0,.2,1) both;
+    }
+    @keyframes barGrow {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
+    }
+
+    .arch-section { margin-bottom: 5rem; }
+
+    /* MVC LAYOUT */
+    .mvc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .mvc-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+    }
+    .mvc-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent2), var(--accent));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .3s;
+    }
+    .mvc-card:hover::after { transform: scaleX(1); }
+    .mvc-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .mvc-title {
+      font-family: var(--font-mono);
+      font-size: .8rem;
+      color: var(--accent2);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: .8rem;
+    }
+    .mvc-items {
+      font-size: .82rem;
+      color: var(--muted);
+      text-align: left;
+      list-style: none;
+    }
+    .mvc-items li {
+      padding: .3rem 0;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: .7rem;
+    }
+    .mvc-items li:last-child { border-bottom: none; }
+
+    .features-section { margin-bottom: 5rem; }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.8rem;
+      position: relative;
+      overflow: hidden;
+      transition: background .2s, border-color .2s;
+    }
+    .feature-card:hover { background: #161616; border-color: rgba(96,240,200,.2); }
+    .feature-icon { font-size: 1.6rem; margin-bottom: 1rem; }
+    .feature-card h3 { font-family: var(--font-display); font-size: 1.1rem; margin-bottom: .5rem; }
+    .feature-card p { font-size: .85rem; color: var(--muted); }
+    .feature-num {
+      position: absolute;
+      top: 1rem; right: 1.2rem;
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      color: rgba(96,240,200,.3);
+      letter-spacing: .1em;
+    }
+
+    .timeline-section { margin-bottom: 5rem; }
+    .timeline {
+      position: relative;
+      margin-top: 2.5rem;
+      padding-left: 2rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent2), var(--accent), transparent);
+    }
+    .tl-item { position: relative; padding: 0 0 2.5rem 2rem; }
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -4px; top: 6px;
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--accent2);
+      box-shadow: 0 0 12px rgba(96,240,200,.5);
+    }
+    .tl-label { font-family: var(--font-mono); font-size: .65rem; color: var(--accent2); letter-spacing: .14em; text-transform: uppercase; margin-bottom: .3rem; }
+    .tl-title { font-family: var(--font-display); font-size: 1.15rem; margin-bottom: .4rem; }
+    .tl-desc { font-size: .88rem; color: var(--muted); }
+
+    .stack-section { margin-bottom: 5rem; }
+    .stack-pills { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
+    .pill {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: .5rem 1.2rem;
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      color: var(--text);
+      letter-spacing: .06em;
+      transition: border-color .2s, color .2s;
+    }
+    .pill:hover { border-color: var(--accent2); color: var(--accent2); }
+    .pill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      color: var(--muted);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media(max-width:768px) {
+      nav { padding: 1rem 1.5rem; }
+      .project-hero { padding: 8rem 1.5rem 3rem; }
+      .project-hero-inner { grid-template-columns: 1fr; }
+      .hero-stats { flex-direction: row; text-align: left; }
+      .stat-item { border-right: none; border-left: 2px solid var(--accent2); padding-right: 0; padding-left: 1rem; }
+      .content-wrapper { padding: 3rem 1.5rem; }
+      .intro-block { grid-template-columns: 1fr; gap: 2rem; }
+      .charts-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .mvc-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: .5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">NP.dev</a>
+    <a class="nav-back" href="index.html#projets">← Retour aux projets</a>
+  </nav>
+
+  <div class="project-hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="project-hero-inner">
+      <div>
+        <div class="project-hero-meta">
+          <span class="tag tag-secondary">PHP</span>
+          <span class="tag tag-primary">HTML/CSS</span>
+          <span class="tag tag-secondary">MySQL</span>
+        </div>
+        <h1>Projet<br><em>Cinéma</em></h1>
+        <p class="project-hero-desc">
+          Application web de gestion et présentation d'un système cinéma — catalogue de films, gestion des séances et réservation en ligne.
+        </p>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-value">5</div>
+          <div class="stat-label">Tables SQL</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">PHP</div>
+          <div class="stat-label">Back-end</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">Web</div>
+          <div class="stat-label">Plateforme</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-wrapper">
+
+    <!-- INTRO -->
+    <div class="intro-block reveal">
+      <div class="intro-text">
+        <p class="section-label">// Introduction</p>
+        <h2>Présentation du projet</h2>
+        <p>
+          Le projet Cinéma est une application web développée en PHP et MySQL dans le cadre du BTS SIO. L'objectif est de proposer une plateforme complète pour la <strong style="color:var(--text)">gestion d'un cinéma</strong> : catalogue de films, programmation des séances et interface de réservation.
+        </p>
+        <p>
+          Le projet suit une architecture MVC claire, séparant la logique métier, la présentation et les données. L'interface est conçue avec HTML et CSS vanilla pour garantir la légèreté et la maintenabilité du code.
+        </p>
+        <p>
+          Il couvre les compétences fondamentales du SLAM : gestion de bases de données relationnelles, développement back-end PHP et conception d'interfaces web accessibles.
+        </p>
+      </div>
+      <div class="intro-card">
+        <div class="info-row"><span class="info-key">Langages</span><span class="info-val">PHP, HTML, CSS</span></div>
+        <div class="info-row"><span class="info-key">Base de données</span><span class="info-val">MySQL</span></div>
+        <div class="info-row"><span class="info-key">Architecture</span><span class="info-val">MVC</span></div>
+        <div class="info-row"><span class="info-key">Hébergement</span><span class="info-val">WAMP / Serveur local</span></div>
+        <div class="info-row"><span class="info-key">Type</span><span class="info-val">Projet BTS SIO — SLAM</span></div>
+        <div class="info-row"><span class="info-key">Statut</span><span class="info-val" style="color:var(--accent)">✓ Terminé</span></div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- CHARTS -->
+    <div class="charts-section reveal" style="margin-top:4rem;">
+      <p class="section-label">// Base de données</p>
+      <h2>Schéma & Statistiques</h2>
+      <div class="charts-grid">
+
+        <!-- DB Schema -->
+        <div class="chart-card" style="grid-column: span 1;">
+          <h3>Schéma de la base de données</h3>
+          <div class="db-schema">
+            <div class="db-table">
+              <div class="db-table-header">🎬 films</div>
+              <div class="db-fields">
+                <span class="db-field pk">id_film PK</span>
+                <span class="db-field">titre</span>
+                <span class="db-field">genre</span>
+                <span class="db-field">duree</span>
+                <span class="db-field">synopsis</span>
+                <span class="db-field">affiche</span>
+              </div>
+            </div>
+            <div class="db-table">
+              <div class="db-table-header">🎭 seances</div>
+              <div class="db-fields">
+                <span class="db-field pk">id_seance PK</span>
+                <span class="db-field fk">id_film FK</span>
+                <span class="db-field fk">id_salle FK</span>
+                <span class="db-field">date_heure</span>
+                <span class="db-field">tarif</span>
+              </div>
+            </div>
+            <div class="db-table">
+              <div class="db-table-header">🎟️ reservations</div>
+              <div class="db-fields">
+                <span class="db-field pk">id_resa PK</span>
+                <span class="db-field fk">id_seance FK</span>
+                <span class="db-field fk">id_user FK</span>
+                <span class="db-field">nb_places</span>
+                <span class="db-field">date_resa</span>
+              </div>
+            </div>
+            <div class="db-table">
+              <div class="db-table-header">🏛️ salles</div>
+              <div class="db-fields">
+                <span class="db-field pk">id_salle PK</span>
+                <span class="db-field">nom</span>
+                <span class="db-field">capacite</span>
+              </div>
+            </div>
+            <div class="db-table">
+              <div class="db-table-header">👤 utilisateurs</div>
+              <div class="db-fields">
+                <span class="db-field pk">id_user PK</span>
+                <span class="db-field">nom</span>
+                <span class="db-field">email</span>
+                <span class="db-field">mdp_hash</span>
+                <span class="db-field">role</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bar chart répartition -->
+        <div class="chart-card">
+          <h3>Répartition du code source</h3>
+          <div class="bar-chart">
+            <div class="bar-row">
+              <div class="bar-label-row"><span>PHP (back-end)</span><span>45%</span></div>
+              <div class="bar-track"><div class="bar-fill" style="width:45%; animation-delay:.1s"></div></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-label-row"><span>HTML (vues)</span><span>25%</span></div>
+              <div class="bar-track"><div class="bar-fill" style="width:25%; animation-delay:.25s"></div></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-label-row"><span>CSS (styles)</span><span>20%</span></div>
+              <div class="bar-track"><div class="bar-fill" style="width:20%; animation-delay:.4s"></div></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-label-row"><span>SQL (requêtes)</span><span>10%</span></div>
+              <div class="bar-track"><div class="bar-fill" style="width:10%; animation-delay:.55s"></div></div>
+            </div>
+          </div>
+
+          <div style="margin-top:2.5rem;">
+            <div style="font-family:var(--font-mono);font-size:.72rem;color:var(--accent2);letter-spacing:.14em;text-transform:uppercase;margin-bottom:1rem;">Pages du site</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;">
+              <div style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:.7rem 1rem;font-family:var(--font-mono);font-size:.68rem;color:var(--muted);">🏠 Accueil</div>
+              <div style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:.7rem 1rem;font-family:var(--font-mono);font-size:.68rem;color:var(--muted);">🎬 Catalogue</div>
+              <div style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:.7rem 1rem;font-family:var(--font-mono);font-size:.68rem;color:var(--muted);">📅 Séances</div>
+              <div style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:.7rem 1rem;font-family:var(--font-mono);font-size:.68rem;color:var(--muted);">🎟️ Réservation</div>
+              <div style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:.7rem 1rem;font-family:var(--font-mono);font-size:.68rem;color:var(--muted);">👤 Connexion</div>
+              <div style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:.7rem 1rem;font-family:var(--font-mono);font-size:.68rem;color:var(--muted);">⚙️ Admin</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ARCHITECTURE MVC -->
+    <div class="arch-section reveal" style="margin-top:4rem;">
+      <p class="section-label">// Technique</p>
+      <h2>Architecture MVC</h2>
+      <div class="mvc-grid">
+        <div class="mvc-card">
+          <div class="mvc-icon">👁️</div>
+          <div class="mvc-title">Vue</div>
+          <ul class="mvc-items">
+            <li>accueil.php</li>
+            <li>catalogue.php</li>
+            <li>seances.php</li>
+            <li>reservation.php</li>
+            <li>admin.php</li>
+          </ul>
+        </div>
+        <div class="mvc-card">
+          <div class="mvc-icon">⚙️</div>
+          <div class="mvc-title">Contrôleur</div>
+          <ul class="mvc-items">
+            <li>FilmController</li>
+            <li>SeanceController</li>
+            <li>ResaController</li>
+            <li>AuthController</li>
+            <li>AdminController</li>
+          </ul>
+        </div>
+        <div class="mvc-card">
+          <div class="mvc-icon">🗄️</div>
+          <div class="mvc-title">Modèle</div>
+          <ul class="mvc-items">
+            <li>Film.php</li>
+            <li>Seance.php</li>
+            <li>Reservation.php</li>
+            <li>Utilisateur.php</li>
+            <li>Salle.php</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- FEATURES -->
+    <div class="features-section reveal" style="margin-top:4rem;">
+      <p class="section-label">// Fonctionnalités</p>
+      <h2>Ce que fait l'application</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-num">01</div>
+          <div class="feature-icon">🎬</div>
+          <h3>Catalogue de films</h3>
+          <p>Affichage des films avec affiche, synopsis, genre et durée.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-num">02</div>
+          <div class="feature-icon">📅</div>
+          <h3>Gestion des séances</h3>
+          <p>Planning des séances par salle avec horaires et tarifs.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-num">03</div>
+          <div class="feature-icon">🎟️</div>
+          <h3>Réservation en ligne</h3>
+          <p>Sélection du nombre de places et confirmation de réservation.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-num">04</div>
+          <div class="feature-icon">🔐</div>
+          <h3>Authentification</h3>
+          <p>Système de connexion sécurisé avec gestion des rôles utilisateur/admin.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-num">05</div>
+          <div class="feature-icon">⚙️</div>
+          <h3>Interface admin</h3>
+          <p>Back-office pour gérer les films, séances et réservations.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-num">06</div>
+          <div class="feature-icon">📱</div>
+          <h3>Design responsive</h3>
+          <p>Interface adaptée aux mobiles, tablettes et desktops.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- TIMELINE -->
+    <div class="timeline-section reveal" style="margin-top:4rem;">
+      <p class="section-label">// Déroulement</p>
+      <h2>Étapes du développement</h2>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-label">Phase 1</div>
+          <div class="tl-title">Analyse des besoins</div>
+          <div class="tl-desc">Définition des cas d'usage, diagrammes UML (cas d'utilisation, classes), cahier des charges fonctionnel.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-label">Phase 2</div>
+          <div class="tl-title">Modélisation de la BDD</div>
+          <div class="tl-desc">Conception du MCD et MLD, création des tables MySQL, définition des contraintes d'intégrité et des clés étrangères.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-label">Phase 3</div>
+          <div class="tl-title">Développement back-end</div>
+          <div class="tl-desc">Implémentation PHP des modèles, contrôleurs, requêtes PDO et gestion des sessions.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-label">Phase 4</div>
+          <div class="tl-title">Développement front-end</div>
+          <div class="tl-desc">Création des vues HTML/CSS, mise en page responsive, intégration des formulaires et des tables d'affichage.</div>
+        </div>
+        <div class="tl-item" style="padding-bottom:0">
+          <div class="tl-label">Phase 5</div>
+          <div class="tl-title">Tests & Déploiement</div>
+          <div class="tl-desc">Tests fonctionnels, vérification de la sécurité (injections SQL, XSS), déploiement sur serveur WAMP local.</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- TECH STACK -->
+    <div class="stack-section reveal" style="margin-top:4rem;">
+      <p class="section-label">// Stack Technique</p>
+      <h2>Technologies utilisées</h2>
+      <div class="stack-pills">
+        <div class="pill"><span class="pill-dot"></span>PHP 8</div>
+        <div class="pill"><span class="pill-dot"></span>MySQL</div>
+        <div class="pill"><span class="pill-dot"></span>HTML5</div>
+        <div class="pill"><span class="pill-dot"></span>CSS3</div>
+        <div class="pill"><span class="pill-dot"></span>PDO</div>
+        <div class="pill"><span class="pill-dot"></span>Architecture MVC</div>
+        <div class="pill"><span class="pill-dot"></span>WAMP</div>
+        <div class="pill"><span class="pill-dot"></span>phpMyAdmin</div>
+        <div class="pill"><span class="pill-dot"></span>VS Code</div>
+        <div class="pill"><span class="pill-dot"></span>GitHub</div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <span>© 2025 Noah Poivre. Tous droits réservés.</span>
+    <span style="color:var(--accent)">BTS SIO · SLAM</span>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
