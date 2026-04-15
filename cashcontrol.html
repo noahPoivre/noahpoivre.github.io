@@ -475,6 +475,49 @@
       .features-grid { grid-template-columns: 1fr; }
       footer { flex-direction: column; gap: .5rem; text-align: center; }
     }
+    /* GALERIE */
+.gallery-section { margin-bottom: 5rem; }
+.screens-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.screen-card {
+  text-align: center;
+}
+.screen-mockup {
+  background: #2a2a2a;
+  border-radius: 16px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border);
+  display: flex;
+  justify-content: center;
+  transition: transform .2s, box-shadow .2s;
+}
+.screen-mockup:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(200,240,96,.15);
+}
+.screen-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: contain;
+}
+.screen-label {
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  color: var(--accent);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: .3rem;
+}
+.screen-desc {
+  font-size: .8rem;
+  color: var(--muted);
+}
   </style>
 </head>
 <body>
@@ -519,7 +562,6 @@
 
   <div class="content-wrapper">
 
-    <!-- INTRO -->
     <div class="intro-block reveal">
       <div class="intro-text">
         <p class="section-label">// Introduction</p>
@@ -742,6 +784,69 @@
           <div class="tl-label">Phase 5</div>
           <div class="tl-title">Tests & finalisation</div>
           <div class="tl-desc">Tests sur émulateur et appareil physique, correction des bugs.</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <!-- GALERIE -->
+    <div class="gallery-section reveal" style="margin-top:4rem;">
+      <p class="section-label">// Interface</p>
+      <h2>Capture d'écrans</h2>
+      <p style="color:var(--muted); margin-bottom:2rem; max-width:600px;">
+        Voici les principales interfaces de l'application <strong style="color:var(--text)">Cash Control</strong>, conçues pour une expérience utilisateur intuitive et une gestion fluide des finances personnelles.
+      </p>
+
+      <!-- Grille des captures -->
+      <div class="screens-grid">
+        <!-- Accueil -->
+        <div class="screen-card">
+          <div class="screen-mockup">
+            <img src="https://mistralaichatupprodswe.blob.core.windows.net/chat-images/26/21/e6/2621e65c-9b7a-434d-8c03-ce273feba968/98ca5f3b-45d2-4b8c-af67-2ed1ada8c521/c3c7cca9-a340-47f2-b943-308cc8572b8f?sv=2025-01-05&spr=https&st=2026-04-15T06%3A58%3A25Z&se=2026-04-15T07%3A58%3A25Z&skoid=c9baccad-3639-4379-a088-07b7e349293c&sktid=4fbc1168-2984-4d17-af19-ac5138c2378e&skt=2026-04-15T06%3A58%3A25Z&ske=2026-04-15T07%3A58%3A25Z&sks=b&skv=2025-01-05&sr=b&sp=r&sig=%2BFHLxHja1IVQDWLnDYaSIaFE314zaVjy%2FKgH4stPInY%3D"
+               alt="Écran d'accueil de Cash Control" class="screen-img">
+          </div>
+          <div class="screen-label">Accueil</div>
+          <div class="screen-desc">Budget disponible et actions principales (ajout/dépense).</div>
+        </div>
+
+        <!-- Ajout de budget -->
+        <div class="screen-card">
+          <div class="screen-mockup">
+            <img src="https://mistralaichatupprodswe.blob.core.windows.net/chat-images/26/21/e6/2621e65c-9b7a-434d-8c03-ce273feba968/98ca5f3b-45d2-4b8c-af67-2ed1ada8c521/ec874af1-7aee-4a18-9701-0224cb8f661e?sv=2025-01-05&spr=https&st=2026-04-15T06%3A58%3A25Z&se=2026-04-15T07%3A58%3A25Z&skoid=c9baccad-3639-4379-a088-07b7e349293c&sktid=4fbc1168-2984-4d17-af19-ac5138c2378e&skt=2026-04-15T06%3A58%3A25Z&ske=2026-04-15T07%3A58%3A25Z&sks=b&skv=2025-01-05&sr=b&sp=r&sig=te7k%2B8vlQPY8joeU4fa%2FxJY9R%2BCrkpdfaK5%2BS3jRc1s%3D"
+               alt="Ajout de budget dans Cash Control" class="screen-img">
+          </div>
+          <div class="screen-label">Ajout de budget</div>
+          <div class="screen-desc">Saisie du montant à ajouter au budget disponible.</div>
+        </div>
+
+        <!-- Nouvelle dépense -->
+        <div class="screen-card">
+          <div class="screen-mockup">
+            <img src="https://mistralaichatupprodswe.blob.core.windows.net/chat-images/26/21/e6/2621e65c-9b7a-434d-8c03-ce273feba968/98ca5f3b-45d2-4b8c-af67-2ed1ada8c521/546bbbc6-1853-4ea2-bde5-0d68f5213a43?sv=2025-01-05&spr=https&st=2026-04-15T06%3A58%3A25Z&se=2026-04-15T07%3A58%3A25Z&skoid=c9baccad-3639-4379-a088-07b7e349293c&sktid=4fbc1168-2984-4d17-af19-ac5138c2378e&skt=2026-04-15T06%3A58%3A25Z&ske=2026-04-15T07%3A58%3A25Z&sks=b&skv=2025-01-05&sr=b&sp=r&sig=jiur7U79ToOqDdSrwRLIHnyB00aN7OMLX2sbFyeh%2Fe4%3D"
+               alt="Nouvelle dépense dans Cash Control" class="screen-img">
+          </div>
+          <div class="screen-label">Nouvelle dépense</div>
+          <div class="screen-desc">Saisie du montant et sélection de la catégorie.</div>
+        </div>
+
+        <!-- Historique -->
+        <div class="screen-card">
+          <div class="screen-mockup">
+            <img src="https://mistralaichatupprodswe.blob.core.windows.net/chat-images/26/21/e6/2621e65c-9b7a-434d-8c03-ce273feba968/98ca5f3b-45d2-4b8c-af67-2ed1ada8c521/b271edb2-9c4c-486e-97fc-666c5cb562cd?sv=2025-01-05&spr=https&st=2026-04-15T06%3A58%3A25Z&se=2026-04-15T07%3A58%3A25Z&skoid=c9baccad-3639-4379-a088-07b7e349293c&sktid=4fbc1168-2984-4d17-af19-ac5138c2378e&skt=2026-04-15T06%3A58%3A25Z&ske=2026-04-15T07%3A58%3A25Z&sks=b&skv=2025-01-05&sr=b&sp=r&sig=COav0XW%2Bcwr8SMoG%2Fj7OPvrB1nSE8kB%2FBoLlObkK6Zs%3D"
+               alt="Historique des transactions dans Cash Control" class="screen-img">
+          </div>
+          <div class="screen-label">Historique</div>
+          <div class="screen-desc">Liste de toutes les transactions (ajouts/dépenses).</div>
+        </div>
+
+        <!-- Statistiques -->
+        <div class="screen-card">
+          <div class="screen-mockup">
+            <img src="https://mistralaichatupprodswe.blob.core.windows.net/chat-images/26/21/e6/2621e65c-9b7a-434d-8c03-ce273feba968/98ca5f3b-45d2-4b8c-af67-2ed1ada8c521/bbcb3007-9720-4a2b-8bc0-680367e4e6f5?sv=2025-01-05&spr=https&st=2026-04-15T06%3A58%3A25Z&se=2026-04-15T07%3A58%3A25Z&skoid=c9baccad-3639-4379-a088-07b7e349293c&sktid=4fbc1168-2984-4d17-af19-ac5138c2378e&skt=2026-04-15T06%3A58%3A25Z&ske=2026-04-15T07%3A58%3A25Z&sks=b&skv=2025-01-05&sr=b&sp=r&sig=0OSKFE6xCPMRxyZbCSm82vpvFP2Nibtp6s6wTgug%2Bts%3D"
+               alt="Statistiques des dépenses dans Cash Control" class="screen-img">
+          </div>
+          <div class="screen-label">Statistiques</div>
+          <div class="screen-desc">Répartition des dépenses par catégorie (graphique).</div>
         </div>
       </div>
     </div>
