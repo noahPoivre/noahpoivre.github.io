@@ -63,7 +63,6 @@
     }
     .nav-back:hover { color: var(--accent); }
 
-    /* HERO PROJECT */
     .project-hero {
       min-height: 60vh;
       display: flex;
@@ -153,7 +152,6 @@
       text-transform: uppercase;
     }
 
-    /* CONTENT */
     .content-wrapper {
       max-width: 1100px;
       margin: 0 auto;
@@ -225,7 +223,6 @@
     }
     .info-val { color: var(--text); font-size: .9rem; }
 
-    /* CHART SECTIONS */
     .charts-section { margin-bottom: 5rem; }
     .charts-grid {
       display: grid;
@@ -249,7 +246,6 @@
       margin-bottom: 1.8rem;
     }
 
-    /* BAR CHART */
     .bar-chart { display: flex; flex-direction: column; gap: .9rem; }
     .bar-row { display: flex; flex-direction: column; gap: .3rem; }
     .bar-label-row {
@@ -278,7 +274,6 @@
       to   { transform: scaleX(1); }
     }
 
-    /* DONUT CHART */
     .donut-wrap {
       display: flex;
       align-items: center;
@@ -302,7 +297,6 @@
       flex-shrink: 0;
     }
 
-    /* ARCHITECTURE */
     .arch-section { margin-bottom: 5rem; }
     .arch-flow {
       display: flex;
@@ -344,7 +338,6 @@
       flex-shrink: 0;
     }
 
-    /* FEATURES */
     .features-section { margin-bottom: 5rem; }
     .features-grid {
       display: grid;
@@ -374,7 +367,6 @@
       letter-spacing: .1em;
     }
 
-    /* TIMELINE */
     .timeline-section { margin-bottom: 5rem; }
     .timeline {
       position: relative;
@@ -416,7 +408,273 @@
     }
     .tl-desc { font-size: .88rem; color: var(--muted); }
 
-    /* TECH STACK */
+    .gallery-section { margin-bottom: 5rem; }
+    .screens-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .screen-card { text-align: center; }
+    .screen-mockup {
+      background: #2a2a2a;
+      border-radius: 16px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border: 1px solid var(--border);
+      display: flex;
+      justify-content: center;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .screen-mockup:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(200,240,96,.15);
+    }
+    .screen-img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+    .screen-label {
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      color: var(--accent);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: .3rem;
+    }
+    .screen-desc { font-size: .8rem; color: var(--muted); }
+
+    /* ===== DOCS SECTION ===== */
+    .docs-section { margin-bottom: 5rem; margin-top: 4rem; }
+
+    .docs-gate {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+    }
+    .docs-gate::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+
+    .docs-locked {
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1.5rem;
+    }
+    .lock-icon {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: rgba(200,240,96,.08);
+      border: 1px solid rgba(200,240,96,.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    .docs-locked h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      margin-bottom: .3rem;
+    }
+    .docs-locked p {
+      font-size: .88rem;
+      color: var(--muted);
+      max-width: 380px;
+    }
+
+    .pwd-form {
+      display: flex;
+      gap: .6rem;
+      align-items: center;
+      margin-top: .5rem;
+    }
+    .pwd-input {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: .65rem 1.1rem;
+      font-family: var(--font-mono);
+      font-size: .82rem;
+      color: var(--text);
+      letter-spacing: .12em;
+      outline: none;
+      transition: border-color .2s;
+      width: 200px;
+    }
+    .pwd-input:focus { border-color: var(--accent); }
+    .pwd-input.error { border-color: #f06060; animation: shake .35s ease; }
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      20%,60% { transform: translateX(-6px); }
+      40%,80% { transform: translateX(6px); }
+    }
+    .pwd-btn {
+      background: rgba(200,240,96,.1);
+      border: 1px solid rgba(200,240,96,.25);
+      border-radius: 4px;
+      padding: .65rem 1.4rem;
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      color: var(--accent);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .2s, border-color .2s;
+    }
+    .pwd-btn:hover { background: rgba(200,240,96,.18); border-color: rgba(200,240,96,.45); }
+    .pwd-error {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      color: #f06060;
+      letter-spacing: .06em;
+      min-height: 1.2em;
+      transition: opacity .2s;
+    }
+
+    .docs-unlocked {
+      display: none;
+      padding: 2.5rem 3rem;
+    }
+    .docs-unlocked.visible { display: block; }
+
+    .docs-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .docs-header-left h3 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      margin-bottom: .3rem;
+    }
+    .docs-header-left p { font-size: .82rem; color: var(--muted); }
+    .docs-badge {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(200,240,96,.08);
+      border: 1px solid rgba(200,240,96,.2);
+      border-radius: 100px;
+      padding: .35rem .9rem;
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      color: var(--accent);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .docs-badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 6px var(--accent);
+    }
+
+    .docs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+    .doc-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.6rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color .2s, background .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .doc-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .3s;
+    }
+    .doc-card:hover {
+      border-color: rgba(200,240,96,.25);
+      background: #141414;
+      transform: translateY(-2px);
+    }
+    .doc-card:hover::after { transform: scaleX(1); }
+
+    .doc-icon {
+      width: 44px; height: 44px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .doc-icon.admin { background: rgba(240,96,96,.1); border: 1px solid rgba(240,96,96,.2); }
+    .doc-icon.user  { background: rgba(200,240,96,.1); border: 1px solid rgba(200,240,96,.2); }
+
+    .doc-info { flex: 1; min-width: 0; }
+    .doc-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      margin-bottom: .3rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .doc-meta {
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      color: var(--muted);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .doc-download {
+      flex-shrink: 0;
+      width: 32px; height: 32px;
+      border-radius: 4px;
+      background: rgba(200,240,96,.08);
+      border: 1px solid rgba(200,240,96,.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s;
+    }
+    .doc-card:hover .doc-download { background: rgba(200,240,96,.18); }
+    .doc-download svg { width: 14px; height: 14px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .docs-note {
+      margin-top: 1.2rem;
+      padding: .8rem 1rem;
+      background: rgba(200,240,96,.05);
+      border: 1px solid rgba(200,240,96,.12);
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--muted);
+      letter-spacing: .04em;
+    }
+    .docs-note span { color: var(--accent); }
+
     .stack-section { margin-bottom: 5rem; }
     .stack-pills {
       display: flex;
@@ -441,7 +699,6 @@
     .pill:hover { border-color: var(--accent); color: var(--accent); }
     .pill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); }
 
-    /* DIVIDER */
     .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
 
     footer {
@@ -455,7 +712,6 @@
       color: var(--muted);
     }
 
-    /* REVEAL */
     .reveal {
       opacity: 0;
       transform: translateY(24px);
@@ -473,51 +729,12 @@
       .intro-block { grid-template-columns: 1fr; gap: 2rem; }
       .charts-grid { grid-template-columns: 1fr; }
       .features-grid { grid-template-columns: 1fr; }
+      .docs-grid { grid-template-columns: 1fr; }
+      .pwd-form { flex-direction: column; width: 100%; }
+      .pwd-input { width: 100%; }
+      .pwd-btn { width: 100%; }
       footer { flex-direction: column; gap: .5rem; text-align: center; }
     }
-    /* GALERIE */
-.gallery-section { margin-bottom: 5rem; }
-.screens-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-.screen-card {
-  text-align: center;
-}
-.screen-mockup {
-  background: #2a2a2a;
-  border-radius: 16px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border: 1px solid var(--border);
-  display: flex;
-  justify-content: center;
-  transition: transform .2s, box-shadow .2s;
-}
-.screen-mockup:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(200,240,96,.15);
-}
-.screen-img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  object-fit: contain;
-}
-.screen-label {
-  font-family: var(--font-mono);
-  font-size: .75rem;
-  color: var(--accent);
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  margin-bottom: .3rem;
-}
-.screen-desc {
-  font-size: .8rem;
-  color: var(--muted);
-}
   </style>
 </head>
 <body>
@@ -612,7 +829,6 @@
       <h2>Répartition & Architecture</h2>
       <div class="charts-grid">
 
-        <!-- Bar chart : temps passé par module -->
         <div class="chart-card">
           <h3>Temps de dev par module</h3>
           <div class="bar-chart">
@@ -635,31 +851,26 @@
           </div>
         </div>
 
-        <!-- Donut : catégories de dépenses gérées -->
         <div class="chart-card">
           <h3>Catégories de dépenses</h3>
           <div class="donut-wrap">
             <svg class="donut-svg" width="110" height="110" viewBox="0 0 110 110">
               <circle cx="55" cy="55" r="40" fill="none" stroke="#1e1e1e" stroke-width="18"/>
-              <!-- Nourriture 35% -->
               <circle cx="55" cy="55" r="40" fill="none" stroke="#c8f060" stroke-width="18"
                 stroke-dasharray="87.96 263.88" stroke-dashoffset="0"
                 transform="rotate(-90 55 55)">
                 <animate attributeName="stroke-dasharray" from="0 351.84" to="87.96 263.88" dur="1s" fill="freeze"/>
               </circle>
-              <!-- Transport 25% -->
               <circle cx="55" cy="55" r="40" fill="none" stroke="#60f0c8" stroke-width="18"
                 stroke-dasharray="62.83 289.01" stroke-dashoffset="-87.96"
                 transform="rotate(-90 55 55)">
                 <animate attributeName="stroke-dasharray" from="0 351.84" to="62.83 289.01" dur="1s" begin=".2s" fill="freeze"/>
               </circle>
-              <!-- Loisirs 20% -->
               <circle cx="55" cy="55" r="40" fill="none" stroke="#f0c860" stroke-width="18"
                 stroke-dasharray="50.27 301.57" stroke-dashoffset="-150.79"
                 transform="rotate(-90 55 55)">
                 <animate attributeName="stroke-dasharray" from="0 351.84" to="50.27 301.57" dur="1s" begin=".35s" fill="freeze"/>
               </circle>
-              <!-- Autres 20% -->
               <circle cx="55" cy="55" r="40" fill="none" stroke="#f060a8" stroke-width="18"
                 stroke-dasharray="50.27 301.57" stroke-dashoffset="-201.06"
                 transform="rotate(-90 55 55)">
@@ -789,6 +1000,7 @@
     </div>
 
     <hr class="divider">
+
     <!-- GALERIE -->
     <div class="gallery-section reveal" style="margin-top:4rem;">
       <p class="section-label">// Interface</p>
@@ -797,18 +1009,14 @@
         Voici les principales interfaces de l'application <strong style="color:var(--text)">Cash Control</strong>, conçues pour une expérience utilisateur intuitive et une gestion fluide des finances personnelles.
       </p>
 
-      <!-- Grille des captures -->
       <div class="screens-grid">
-        <!-- Accueil -->
         <div class="screen-card">
           <div class="screen-mockup">
-            <img src="accueil.png"alt="Écran d'accueil de Cash Control" class="screen-img">
+            <img src="accueil.png" alt="Écran d'accueil de Cash Control" class="screen-img">
           </div>
           <div class="screen-label">Accueil</div>
           <div class="screen-desc">Budget disponible et actions principales (ajout/dépense).</div>
         </div>
-
-        <!-- Ajout de budget -->
         <div class="screen-card">
           <div class="screen-mockup">
             <img src="ajout.png" alt="Ajout de budget dans Cash Control" class="screen-img">
@@ -816,8 +1024,6 @@
           <div class="screen-label">Ajout de budget</div>
           <div class="screen-desc">Saisie du montant à ajouter au budget disponible.</div>
         </div>
-
-        <!-- Nouvelle dépense -->
         <div class="screen-card">
           <div class="screen-mockup">
             <img src="depense.png" alt="Nouvelle dépense dans Cash Control" class="screen-img">
@@ -825,8 +1031,6 @@
           <div class="screen-label">Nouvelle dépense</div>
           <div class="screen-desc">Saisie du montant et sélection de la catégorie.</div>
         </div>
-
-        <!-- Historique -->
         <div class="screen-card">
           <div class="screen-mockup">
             <img src="log.png" alt="Historique des transactions dans Cash Control" class="screen-img">
@@ -834,8 +1038,6 @@
           <div class="screen-label">Historique</div>
           <div class="screen-desc">Liste de toutes les transactions (ajouts/dépenses).</div>
         </div>
-
-        <!-- Statistiques -->
         <div class="screen-card">
           <div class="screen-mockup">
             <img src="statistique.png" alt="Statistiques des dépenses dans Cash Control" class="screen-img">
@@ -843,6 +1045,83 @@
           <div class="screen-label">Statistiques</div>
           <div class="screen-desc">Répartition des dépenses par catégorie (graphique).</div>
         </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- DOCUMENTATION (PASSWORD PROTECTED) -->
+    <div class="docs-section reveal">
+      <p class="section-label">// Documentation</p>
+      <h2>Télécharger les documents</h2>
+
+      <div class="docs-gate">
+
+        <!-- LOCKED -->
+        <div class="docs-locked" id="docsLocked">
+          <div class="lock-icon">🔒</div>
+          <div>
+            <h3>Accès restreint</h3>
+            <p>Les documents de ce projet sont protégés. Entrez le mot de passe pour accéder aux téléchargements.</p>
+          </div>
+          <div>
+            <div class="pwd-form">
+              <input
+                class="pwd-input"
+                id="pwdInput"
+                type="password"
+                placeholder="Mot de passe…"
+                autocomplete="off"
+                maxlength="32"
+              />
+              <button class="pwd-btn" id="pwdBtn">Accéder →</button>
+            </div>
+            <div class="pwd-error" id="pwdError"></div>
+          </div>
+        </div>
+
+        <!-- UNLOCKED -->
+        <div class="docs-unlocked" id="docsUnlocked">
+          <div class="docs-header">
+            <div class="docs-header-left">
+              <h3>Documents disponibles</h3>
+              <p>Cliquez sur un document pour le télécharger.</p>
+            </div>
+            <div class="docs-badge">
+              <span class="docs-badge-dot"></span>
+              Accès autorisé
+            </div>
+          </div>
+
+          <div class="docs-grid">
+            <a class="doc-card" href="CashControl_Doc_Admin.pdf" download>
+              <div class="doc-icon admin">🛡️</div>
+              <div class="doc-info">
+                <div class="doc-title">Documentation Administrateur</div>
+                <div class="doc-meta">PDF · CashControl · v1.0</div>
+              </div>
+              <div class="doc-download">
+                <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </div>
+            </a>
+
+            <a class="doc-card" href="CashControl_Doc_Utilisateur.pdf" download>
+              <div class="doc-icon user">📖</div>
+              <div class="doc-info">
+                <div class="doc-title">Documentation Utilisateur</div>
+                <div class="doc-meta">PDF · CashControl · v1.0</div>
+              </div>
+              <div class="doc-download">
+                <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </div>
+            </a>
+          </div>
+
+          <div class="docs-note">
+            <span>ℹ</span> Ces documents sont fournis à titre informatif dans le cadre du BTS SIO. La documentation administrateur contient des informations techniques sensibles.
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -878,6 +1157,32 @@
       });
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Password gate
+    const CORRECT  = 'DOC2026';
+    const input    = document.getElementById('pwdInput');
+    const btn      = document.getElementById('pwdBtn');
+    const errEl    = document.getElementById('pwdError');
+    const locked   = document.getElementById('docsLocked');
+    const unlocked = document.getElementById('docsUnlocked');
+
+    function unlock() {
+      if (input.value === CORRECT) {
+        locked.style.display = 'none';
+        unlocked.classList.add('visible');
+      } else {
+        errEl.textContent = 'Mot de passe incorrect.';
+        input.classList.add('error');
+        input.value = '';
+        setTimeout(() => {
+          input.classList.remove('error');
+          errEl.textContent = '';
+        }, 1500);
+      }
+    }
+
+    btn.addEventListener('click', unlock);
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') unlock(); });
   </script>
   <script src="analytics.js"></script>
 </body>
